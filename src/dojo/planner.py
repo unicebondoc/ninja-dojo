@@ -121,7 +121,7 @@ Schema:
                 stdout=subprocess.PIPE,
                 stderr=subprocess.PIPE,
                 text=True,
-                timeout=180,
+                timeout=300,
                 check=False,
             )
     except subprocess.TimeoutExpired as e:
