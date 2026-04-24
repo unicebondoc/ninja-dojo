@@ -13,6 +13,7 @@ def test_plan_next_unit_returns_valid_schema():
         "acceptance_criteria": ["a", "b"],
         "labels": ["test"],
         "complexity": "S",
+        "why": "test why line",
     }
     fake_result = MagicMock(
         returncode=0,
@@ -23,8 +24,11 @@ def test_plan_next_unit_returns_valid_schema():
     with patch("dojo.planner._ensure_workspace", return_value=None), \
          patch("dojo.planner._git_log", return_value="abc init"), \
          patch("dojo.planner._todos", return_value="(none)"), \
-         patch("dojo.planner.subprocess.run", return_value=fake_result):
+         patch("dojo.planner.subprocess.run", return_value=fake_result), \
+         patch("dojo.planner.read_memory_for_repo", return_value=""), \
+         patch("dojo.planner.append_memory_line") as mock_append:
         result = planner.plan_next_unit("ninja-publisher")
+    mock_append.assert_called_once()
 
     assert set(result) >= {"title", "body", "acceptance_criteria", "labels", "complexity"}
     assert result["complexity"] in ("S", "M", "L")

@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import subprocess
 import tempfile
 import time
@@ -14,6 +15,7 @@ import traceback
 from pathlib import Path
 
 from dojo.guard import assert_not_butler_brain
+from dojo.memory import append_memory_line, read_memory_for_repo
 
 WORKSPACES = Path.home() / "ninja-clan" / "workspaces"
 LOG_DIR = Path.home() / "ninja-clan" / "ninja-dojo" / "logs"
@@ -70,28 +72,41 @@ def _write_hang_log(repo: str, prompt: str, e: subprocess.TimeoutExpired) -> Non
 def plan_next_unit(repo: str) -> dict:
     assert_not_butler_brain(WORKSPACES / repo)
     ws = _ensure_workspace(repo)
-    context_block = (
-        f"Recent commits:\n{_git_log(ws)}\n\n"
-        f"Open TODO/FIXME markers:\n{_todos(ws)}"
-    )
-    planner_prompt = f"""You are Moji, the product planner for Ninja Dojo.
+    git_log_output = _git_log(ws)
+    todos_output = _todos(ws)
+    memory_context = read_memory_for_repo(repo)
 
-Given this repo state for {repo}:
+    planner_prompt = f"""You are Moji, planner for Ninja Dojo.
 
-{context_block}
+Produce the SMALLEST shippable next unit for repo `{repo}` as a GitHub
+Issue. Complexity S or M only, never L. Respect sacred paths (never touch
+~/ninja-butler-brain/). Use $0 stack (no ANTHROPIC_API_KEY, no anthropic SDK).
 
-Produce the SMALLEST shippable next unit as a GitHub Issue.
+{memory_context if memory_context else "(No prior memory — this is the first plan.)"}
 
-Return STRICT JSON ONLY (no markdown fences, no prose before or after), matching this schema:
+## Current repo state
+
+Workspace: {ws}
+
+Recent git log:
+{git_log_output}
+
+TODOs/FIXMEs:
+{todos_output}
+
+## Output contract
+
+Return STRICT JSON ONLY. No markdown fences. No prose before or after.
+Schema:
 {{
-  "title": "string (max 80 chars)",
-  "body": "markdown string describing the work",
-  "acceptance_criteria": ["string", ...],
-  "labels": ["string", ...],
-  "complexity": "S" | "M" | "L"
+  "title": "string (max 80 chars, imperative mood)",
+  "body": "markdown with Context / Work / Out-of-scope / Why-smallest-next sections",
+  "acceptance_criteria": ["concrete testable item", ...],
+  "labels": ["string"],
+  "complexity": "S" | "M",
+  "why": "one-line summary for memory (max 120 chars, what makes this the right next unit)"
 }}
-
-Never exceed complexity M. Return ONLY the JSON object, nothing else."""
+"""
 
     with tempfile.NamedTemporaryFile(
         mode="w", suffix=".txt", delete=False, encoding="utf-8"
@@ -129,21 +144,31 @@ Never exceed complexity M. Return ONLY the JSON object, nothing else."""
     except json.JSONDecodeError:
         assistant_text = result.stdout
 
-    cleaned = assistant_text.strip()
-    if cleaned.startswith("```"):
-        lines = cleaned.split("\n")
-        cleaned = "\n".join(lines[1:-1] if lines[-1].strip() == "```" else lines[1:])
-
+    match = re.search(r"\{[\s\S]*\}", assistant_text)
+    if not match:
+        raise RuntimeError(
+            f"planner returned no JSON object:\nraw={assistant_text[:500]!r}"
+        )
     try:
-        plan = json.loads(cleaned)
+        plan = json.loads(match.group(0))
     except json.JSONDecodeError as e:
         raise RuntimeError(
-            f"planner returned non-JSON:\nraw={assistant_text[:500]!r}\nerror={e}"
+            f"planner returned malformed JSON:\nraw={assistant_text[:500]!r}\nerror={e}"
         ) from e
 
-    required_keys = {"title", "body", "acceptance_criteria", "labels", "complexity"}
+    required_keys = {"title", "body", "acceptance_criteria", "labels", "complexity", "why"}
     missing = required_keys - set(plan.keys())
     if missing:
         raise RuntimeError(f"planner output missing keys: {missing}")
+
+    try:
+        append_memory_line(
+            repo_name=repo,
+            title=plan["title"],
+            complexity=plan["complexity"],
+            why=plan.get("why", "(no why provided)"),
+        )
+    except Exception as e:
+        print(f"[memory] append failed (non-fatal): {e!r}", flush=True)
 
     return plan
