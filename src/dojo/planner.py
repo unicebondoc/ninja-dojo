@@ -6,12 +6,16 @@ matching builder.py and reviewer.py. No Anthropic API key, no per-call billing.
 from __future__ import annotations
 
 import json
+import os
 import subprocess
+import time
+import traceback
 from pathlib import Path
 
 from dojo.guard import assert_not_butler_brain
 
 WORKSPACES = Path.home() / "ninja-clan" / "workspaces"
+LOG_DIR = Path.home() / "ninja-clan" / "ninja-dojo" / "logs"
 GH_USER = "unicebondoc"
 
 
@@ -36,6 +40,30 @@ def _todos(path: Path) -> str:
            "--include=*.js", "-E", "TODO|FIXME", "."]
     r = subprocess.run(cmd, cwd=path, capture_output=True, text=True)
     return "\n".join(r.stdout.strip().splitlines()[:40]) or "(none)"
+
+
+def _write_hang_log(repo: str, prompt: str, e: subprocess.TimeoutExpired) -> None:
+    try:
+        LOG_DIR.mkdir(parents=True, exist_ok=True)
+        ts = int(time.time())
+        path = LOG_DIR / f"planner-hang-{repo}-{ts}.log"
+        pout = e.stdout or b"" if isinstance(e.stdout, bytes) else (e.stdout or "")
+        perr = e.stderr or b"" if isinstance(e.stderr, bytes) else (e.stderr or "")
+        if isinstance(pout, bytes):
+            pout = pout.decode("utf-8", errors="replace")
+        if isinstance(perr, bytes):
+            perr = perr.decode("utf-8", errors="replace")
+        with open(path, "w") as f:
+            f.write(f"=== planner hang at {ts} ({time.ctime(ts)}) ===\n")
+            f.write(f"repo: {repo}\ncmd: {e.cmd}\ntimeout: {e.timeout}\nprompt_bytes: {len(prompt)}\n")
+            f.write("env_subset:\n")
+            for k in ("HOME", "PATH", "USER", "XDG_CONFIG_HOME", "CLAUDE_CONFIG_DIR"):
+                f.write(f"  {k}={os.environ.get(k, '<unset>')}\n")
+            f.write(f"\n=== partial_stdout ({len(pout)} chars) ===\n{pout[-8000:]}\n")
+            f.write(f"\n=== partial_stderr ({len(perr)} chars) ===\n{perr[-8000:]}\n")
+            f.write(f"\n=== python stack ===\n{traceback.format_exc()}\n")
+    except Exception as log_err:
+        print(f"forensic log write failed: {log_err}", flush=True)
 
 
 def plan_next_unit(repo: str) -> dict:
@@ -64,14 +92,18 @@ Return STRICT JSON ONLY (no markdown fences, no prose before or after), matching
 
 Never exceed complexity M. Return ONLY the JSON object, nothing else."""
 
-    result = subprocess.run(
-        ["claude", "--print", "--output-format", "json"],
-        input=planner_prompt,
-        capture_output=True,
-        text=True,
-        timeout=180,
-        check=False,
-    )
+    try:
+        result = subprocess.run(
+            ["claude", "--print", "--output-format", "json"],
+            input=planner_prompt,
+            capture_output=True,
+            text=True,
+            timeout=180,
+            check=False,
+        )
+    except subprocess.TimeoutExpired as e:
+        _write_hang_log(repo, planner_prompt, e)
+        raise
 
     if result.returncode != 0:
         raise RuntimeError(

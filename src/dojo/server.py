@@ -1,6 +1,10 @@
 """Flask server mounting Slack + GitHub webhook routes. Binds 127.0.0.1:8787."""
 from __future__ import annotations
 
+import subprocess
+import sys
+import time
+
 from flask import Flask, request
 
 from dojo.slack_handler import bolt_handler
@@ -8,6 +12,31 @@ from dojo.webhook_handler import bp as webhook_bp
 
 app = Flask(__name__)
 app.register_blueprint(webhook_bp)
+
+
+def _prewarm_claude() -> None:
+    """Pay claude CLI cold-start cost at boot, not on first user request."""
+    t0 = time.time()
+    try:
+        r = subprocess.run(
+            ["claude", "--print", "--output-format", "json"],
+            input='Reply with exactly the JSON: {"pong": true}',
+            capture_output=True, text=True, timeout=120, check=False,
+        )
+        elapsed = time.time() - t0
+        if r.returncode == 0:
+            print(f"[prewarm] claude CLI warm in {elapsed:.1f}s", flush=True)
+        else:
+            print(f"[prewarm] claude CLI returned code {r.returncode} in {elapsed:.1f}s", flush=True)
+            print(f"[prewarm] stderr: {r.stderr[:500]!r}", flush=True)
+    except subprocess.TimeoutExpired:
+        print(f"[prewarm] claude CLI TIMED OUT at boot ({time.time()-t0:.1f}s). "
+              "First user request may hang.", flush=True)
+    except FileNotFoundError:
+        print("[prewarm] claude CLI not found in PATH. First request will fail.",
+              flush=True, file=sys.stderr)
+    except Exception as e:
+        print(f"[prewarm] unexpected error: {e!r}", flush=True)
 
 
 @app.route("/slack/commands", methods=["POST"])
@@ -23,6 +52,7 @@ def health():
 
 
 def main() -> None:
+    _prewarm_claude()
     app.run(host="127.0.0.1", port=8787)
 
 
