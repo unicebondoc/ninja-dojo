@@ -1,32 +1,18 @@
-"""Plan the smallest shippable next unit for a target repo."""
+"""Plan the smallest shippable next unit for a target repo.
+
+Uses the `claude` CLI subprocess (Max-plan OAuth via ~/.claude/.credentials.json),
+matching builder.py and reviewer.py. No Anthropic API key, no per-call billing.
+"""
 from __future__ import annotations
 
 import json
-import re
 import subprocess
 from pathlib import Path
 
-from anthropic import Anthropic
-
-from dojo import config
 from dojo.guard import assert_not_butler_brain
 
 WORKSPACES = Path.home() / "ninja-clan" / "workspaces"
 GH_USER = "unicebondoc"
-MODEL = "claude-sonnet-4-6"
-
-PLANNER_PROMPT = """You are Moji. Given the following repo state, produce the SMALLEST
-shippable next unit as a GitHub Issue. Return STRICT JSON ONLY, no prose, matching:
-{{"title": str, "body": str, "acceptance_criteria": [str, ...], "labels": [str, ...], "complexity": "S"|"M"}}
-Never exceed complexity M. Keep acceptance_criteria testable, one bullet per item.
-
---- Repo: {repo} ---
-Recent commits:
-{git_log}
-
-Open TODO/FIXME markers:
-{todos}
-"""
 
 
 def _ensure_workspace(repo: str) -> Path:
@@ -55,14 +41,64 @@ def _todos(path: Path) -> str:
 def plan_next_unit(repo: str) -> dict:
     assert_not_butler_brain(WORKSPACES / repo)
     ws = _ensure_workspace(repo)
-    prompt = PLANNER_PROMPT.format(repo=repo, git_log=_git_log(ws), todos=_todos(ws))
-    client = Anthropic(api_key=config.ANTHROPIC_API_KEY)
-    msg = client.messages.create(
-        model=MODEL, max_tokens=2048,
-        messages=[{"role": "user", "content": prompt}],
+    context_block = (
+        f"Recent commits:\n{_git_log(ws)}\n\n"
+        f"Open TODO/FIXME markers:\n{_todos(ws)}"
     )
-    text = msg.content[0].text
-    match = re.search(r"\{[\s\S]*\}", text)
-    if not match:
-        raise ValueError(f"Planner returned non-JSON: {text[:200]}")
-    return json.loads(match.group(0))
+    planner_prompt = f"""You are Moji, the product planner for Ninja Dojo.
+
+Given this repo state for {repo}:
+
+{context_block}
+
+Produce the SMALLEST shippable next unit as a GitHub Issue.
+
+Return STRICT JSON ONLY (no markdown fences, no prose before or after), matching this schema:
+{{
+  "title": "string (max 80 chars)",
+  "body": "markdown string describing the work",
+  "acceptance_criteria": ["string", ...],
+  "labels": ["string", ...],
+  "complexity": "S" | "M" | "L"
+}}
+
+Never exceed complexity M. Return ONLY the JSON object, nothing else."""
+
+    result = subprocess.run(
+        ["claude", "--print", "--output-format", "json"],
+        input=planner_prompt,
+        capture_output=True,
+        text=True,
+        timeout=60,
+        check=False,
+    )
+
+    if result.returncode != 0:
+        raise RuntimeError(
+            f"claude CLI failed (exit {result.returncode}): stderr={result.stderr[:500]!r}"
+        )
+
+    try:
+        envelope = json.loads(result.stdout)
+        assistant_text = envelope.get("result") or envelope.get("text") or ""
+    except json.JSONDecodeError:
+        assistant_text = result.stdout
+
+    cleaned = assistant_text.strip()
+    if cleaned.startswith("```"):
+        lines = cleaned.split("\n")
+        cleaned = "\n".join(lines[1:-1] if lines[-1].strip() == "```" else lines[1:])
+
+    try:
+        plan = json.loads(cleaned)
+    except json.JSONDecodeError as e:
+        raise RuntimeError(
+            f"planner returned non-JSON:\nraw={assistant_text[:500]!r}\nerror={e}"
+        ) from e
+
+    required_keys = {"title", "body", "acceptance_criteria", "labels", "complexity"}
+    missing = required_keys - set(plan.keys())
+    if missing:
+        raise RuntimeError(f"planner output missing keys: {missing}")
+
+    return plan

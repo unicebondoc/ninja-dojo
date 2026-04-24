@@ -78,7 +78,7 @@ def gh_token() -> str:
 _EXPECTED = {
     "SLACK_BOT_TOKEN": (True, None),
     "SLACK_SIGNING_SECRET": (True, None),
-    "ANTHROPIC_API_KEY": (True, None),
+    "ANTHROPIC_API_KEY": (False, None),
     "GITHUB_WEBHOOK_SECRET": (True, None),
     "MOJI_COMMANDS_CHANNEL_ID": (False, "C0ASL49F2P8"),
     "MOJI_DIARY_CHANNEL_ID": (False, "C0ASL49F2P8"),
