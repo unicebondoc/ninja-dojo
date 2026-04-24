@@ -88,7 +88,7 @@ def _cmd_ship(ack, respond, command, client):
     if not repo:
         respond("Usage: /moji-ship <repo>")
         return
-    respond(f"🥷 <@{command['user_id']}> planning next unit for `{repo}`... (~30s)")
+    respond(f"🥷 <@{command['user_id']}> planning next unit for `{repo}`... (~30-90s)")
     threading.Thread(
         target=_ship_background,
         args=(repo, command["channel_id"], client),
@@ -103,7 +103,7 @@ def _cmd_whats_next(ack, respond, command, client):
     if not repo:
         respond("Usage: /moji-whats-next <repo>")
         return
-    respond(f"🔮 Dry-running planner for `{repo}`... (~30s)")
+    respond(f"🔮 Dry-running planner for `{repo}`... (~30-90s)")
     threading.Thread(
         target=_whats_next_background,
         args=(repo, command["channel_id"], client),
@@ -154,7 +154,7 @@ def _msg_ship(message, say, client):
         return
     repo = m.group(1)
     channel_id = message["channel"]
-    say(f"🥷 planning next unit for `{repo}`... (~30s)")
+    say(f"🥷 planning next unit for `{repo}`... (~30-90s)")
     threading.Thread(
         target=_ship_background,
         args=(repo, channel_id, client),

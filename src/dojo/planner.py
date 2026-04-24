@@ -69,7 +69,7 @@ Never exceed complexity M. Return ONLY the JSON object, nothing else."""
         input=planner_prompt,
         capture_output=True,
         text=True,
-        timeout=60,
+        timeout=180,
         check=False,
     )
 
