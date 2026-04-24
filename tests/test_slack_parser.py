@@ -48,3 +48,31 @@ def test_cmd_whats_next_acks_and_defers_to_background_thread():
     respond.assert_called_once()
     MockThread.assert_called_once()
     MockThread.return_value.start.assert_called_once()
+
+
+def test_ensure_labels_exist_creates_missing_skips_existing():
+    list_result = MagicMock(returncode=0, stdout="bug\nenhancement\n", stderr="")
+    create_result = MagicMock(returncode=0, stdout="", stderr="")
+    calls = []
+
+    def fake_run(cmd, **kwargs):
+        calls.append(cmd)
+        if "list" in cmd:
+            return list_result
+        return create_result
+
+    with patch("dojo.slack_handler.subprocess.run", side_effect=fake_run):
+        slack_handler._ensure_labels_exist("x/y", ["bug", "new-label", "other"])
+
+    list_calls = [c for c in calls if "list" in c]
+    create_calls = [c for c in calls if "create" in c]
+    assert len(list_calls) == 1
+    # Each `gh label create` cmd has the label name at index 3
+    created_names = sorted(c[3] for c in create_calls)
+    assert created_names == ["new-label", "other"]
+
+
+def test_ensure_labels_exist_noop_on_empty_list():
+    with patch("dojo.slack_handler.subprocess.run") as mrun:
+        slack_handler._ensure_labels_exist("x/y", [])
+    mrun.assert_not_called()

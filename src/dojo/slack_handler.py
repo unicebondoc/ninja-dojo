@@ -30,16 +30,45 @@ def _paused(repo: str) -> bool:
     return (PAUSE_DIR / f"dojo-paused-{repo}").exists()
 
 
+def _ensure_labels_exist(repo_full: str, labels: list[str]) -> None:
+    """Create any labels not already on the repo. Non-fatal on errors."""
+    if not labels:
+        return
+    r = subprocess.run(
+        ["gh", "label", "list", "-R", repo_full, "--limit", "200",
+         "--json", "name", "-q", ".[].name"],
+        capture_output=True, text=True, timeout=30, check=False,
+    )
+    existing = {ln.strip() for ln in r.stdout.splitlines() if ln.strip()} if r.returncode == 0 else set()
+    for label in labels:
+        if label in existing:
+            continue
+        subprocess.run(
+            ["gh", "label", "create", label, "-R", repo_full,
+             "--color", "ededed",
+             "--description", "Auto-created by Dojo for planner label"],
+            capture_output=True, text=True, timeout=30, check=False,
+        )
+
+
 def _create_issue(repo: str, plan: dict) -> dict:
+    repo_full = f"{GH_USER}/{repo}"
+    _ensure_labels_exist(repo_full, plan.get("labels", []))
     body = plan["body"] + "\n\n## Acceptance criteria\n" + "\n".join(
         f"- [ ] {c}" for c in plan.get("acceptance_criteria", [])
     )
-    args = ["gh", "issue", "create", "-R", f"{GH_USER}/{repo}",
+    args = ["gh", "issue", "create", "-R", repo_full,
             "-t", plan["title"], "-b", body]
     labels = ",".join(plan.get("labels", []))
     if labels:
         args += ["-l", labels]
-    r = subprocess.run(args, capture_output=True, text=True, check=True)
+    r = subprocess.run(args, capture_output=True, text=True, timeout=60, check=False)
+    if r.returncode != 0:
+        raise RuntimeError(
+            f"gh issue create failed (exit {r.returncode}):\n"
+            f"stderr: {r.stderr[:500]}\n"
+            f"stdout: {r.stdout[:200]}"
+        )
     url = r.stdout.strip()
     return {"number": int(url.rsplit("/", 1)[-1]), "html_url": url}
 
