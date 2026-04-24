@@ -1,0 +1,15 @@
+[Unit]
+Description=Ninja Dojo autonomous build orchestrator
+After=network.target
+
+[Service]
+Type=simple
+User=uniceadmin
+WorkingDirectory=/home/uniceadmin/ninja-clan/ninja-dojo
+ExecStart=/home/uniceadmin/.local/bin/uv run python -m dojo.server
+Restart=on-failure
+RestartSec=5
+Environment=PATH=/home/uniceadmin/.local/bin:/home/uniceadmin/.npm-global/bin:/usr/local/bin:/usr/bin:/bin
+
+[Install]
+WantedBy=multi-user.target
