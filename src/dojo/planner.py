@@ -8,6 +8,7 @@ from __future__ import annotations
 import json
 import os
 import subprocess
+import tempfile
 import time
 import traceback
 from pathlib import Path
@@ -92,18 +93,30 @@ Return STRICT JSON ONLY (no markdown fences, no prose before or after), matching
 
 Never exceed complexity M. Return ONLY the JSON object, nothing else."""
 
+    with tempfile.NamedTemporaryFile(
+        mode="w", suffix=".txt", delete=False, encoding="utf-8"
+    ) as tf:
+        tf.write(planner_prompt)
+        prompt_path = tf.name
     try:
-        result = subprocess.run(
-            ["claude", "--print", "--output-format", "json"],
-            input=planner_prompt,
-            capture_output=True,
-            text=True,
-            timeout=180,
-            check=False,
-        )
+        with open(prompt_path) as stdin_fh:
+            result = subprocess.run(
+                ["claude", "--print", "--output-format", "json"],
+                stdin=stdin_fh,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                text=True,
+                timeout=180,
+                check=False,
+            )
     except subprocess.TimeoutExpired as e:
         _write_hang_log(repo, planner_prompt, e)
         raise
+    finally:
+        try:
+            os.unlink(prompt_path)
+        except OSError:
+            pass
 
     if result.returncode != 0:
         raise RuntimeError(
