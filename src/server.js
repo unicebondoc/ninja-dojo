@@ -16,7 +16,7 @@ import {
   startMissionRun
 } from "./mission-engine.js";
 import { bridgeStatus, parseOpenClawEnvelope } from "./openclaw-bridge.js";
-import { readWorld, updateWorld, writeWorld } from "./store.js";
+import { readWorld, updateWorld } from "./store.js";
 import { executeWorker } from "./workers.js";
 
 const HOST = process.env.HOST || "127.0.0.1";
@@ -361,7 +361,6 @@ function parseMaybeJson(text) {
   }
 }
 
-await writeWorld(await readWorld());
 await recoverInterruptedRuns();
 
 server.listen(PORT, HOST, () => {
