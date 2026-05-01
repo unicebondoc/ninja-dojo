@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ninja Dojo</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="stage" aria-label="Ninja Dojo cockpit">
+        <canvas id="world" width="1280" height="720" aria-label="Ninja Dojo world map"></canvas>
+        <aside class="hud" aria-label="Mission state">
+          <div>
+            <span>Mission Board</span>
+            <strong id="mission-count">0 missions</strong>
+          </div>
+          <div>
+            <span>Worker Plaza</span>
+            <strong id="worker-state">idle</strong>
+          </div>
+          <div>
+            <span>Receipt Archive</span>
+            <strong id="receipt-count">0 receipts</strong>
+          </div>
+          <div>
+            <span>OpenClaw Tower</span>
+            <strong id="openclaw-state">checking</strong>
+          </div>
+        </aside>
+      </section>
+
+      <aside class="operator" aria-label="Dojo operator controls">
+        <form class="mission-form" id="mission-form">
+          <label for="mission-scroll">New Mission</label>
+          <textarea id="mission-scroll" name="scroll" rows="4" placeholder="Drop a mission scroll..."></textarea>
+          <div class="form-row">
+            <select id="mission-agent" name="agent" aria-label="Worker agent">
+              <option value="codex">Codex</option>
+              <option value="claude">Claude</option>
+            </select>
+            <button type="submit">Create</button>
+          </div>
+          <p id="form-status" role="status"></p>
+        </form>
+
+        <section>
+          <h2>Pending Gate</h2>
+          <div id="pending-list" class="mission-list"></div>
+        </section>
+
+        <section>
+          <h2>Recent Missions</h2>
+          <div id="mission-list" class="mission-list"></div>
+        </section>
+
+        <section>
+          <h2>Receipts</h2>
+          <div id="receipt-list" class="receipt-list"></div>
+        </section>
+
+        <section>
+          <h2>Event Stream</h2>
+          <div id="event-list" class="event-list"></div>
+        </section>
+      </aside>
+    </main>
+    <script src="/world.js" type="module"></script>
+  </body>
+</html>

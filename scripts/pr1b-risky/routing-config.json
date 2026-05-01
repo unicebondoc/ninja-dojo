@@ -1,0 +1,96 @@
+{
+  "customer_facing_channel_ids": [
+    "1499353518010798273",
+    "1499353536159547462",
+    "1499353609991884861"
+  ],
+  "codex_channel_ids": [
+    "1499353554702569492"
+  ],
+  "channel_project_paths": {
+    "1499353462624751808": "/home/uniceadmin/projects/Business/ninjapply",
+    "1499353518010798273": "/home/uniceadmin/projects/Business/landlit",
+    "1499353536159547462": "/home/uniceadmin/projects/Personal/what-was-drawn",
+    "1499353554702569492": "/home/uniceadmin/projects/Personal/ninja-publisher",
+    "1499353573438525532": "/home/uniceadmin/projects/Personal/ninja-listener",
+    "1499353591591338035": "/home/uniceadmin/projects/Business/unikre",
+    "1499353654912614530": "/home/uniceadmin/projects/Personal/ninja-dojo",
+    "1499353371151302707": "/home/uniceadmin/projects/Personal/ninja-publisher",
+    "1499353426121851032": "/home/uniceadmin/projects/Personal/ninja-dojo",
+    "1499395882288681145": "/home/uniceadmin/projects/Personal/ninja-dojo",
+    "1499395918007504916": "/home/uniceadmin/ninja-clan/agent-teams",
+    "1499575488119705691": "/home/uniceadmin/projects/Personal/pocket-ninja"
+  },
+  "codex_channel_names_for_log": {
+    "1499353554702569492": "#ninja-publisher"
+  },
+  "customer_facing_channel_names_for_log": {
+    "1499353518010798273": "#landlit",
+    "1499353536159547462": "#what-was-drawn",
+    "1499353609991884861": "#brain-private"
+  },
+  "channel_names_for_log": {
+    "1499353462624751808": "#ninjapply",
+    "1499353518010798273": "#landlit",
+    "1499353536159547462": "#what-was-drawn",
+    "1499353554702569492": "#ninja-publisher",
+    "1499353573438525532": "#ninja-listener",
+    "1499353591591338035": "#unikre",
+    "1499353654912614530": "#motivation",
+    "1499353426121851032": "#miji-builder",
+    "1499395882288681145": "#ninja-dojo",
+    "1499395918007504916": "#ninja-clan",
+    "1499575488119705691": "#pocket-ninja",
+    "1499353371151302707": "#product-improvements"
+  },
+  "long_horizon_code_block_line_threshold": 50,
+  "long_horizon_prefixes": [
+    "debug:",
+    "longrun:"
+  ],
+  "dojo_mission_prefixes": ["mission:"],
+  "default_chain_documentation": [
+    "Informational only. Authoritative chain lives in agents.defaults.model in openclaw.json.",
+    "Plugin returns no override for default case; agents.defaults.model.primary fires.",
+    "ollama/minimax-m2.7 \u2192 ollama/kimi-k2.5 \u2192 ollama/glm-5.1 \u2192 ollama/deepseek-v4-flash:cloud"
+  ],
+  "image_attachment_target": "ollama/kimi-k2.5",
+  "long_horizon_target": "ollama/glm-5.1",
+  "customer_facing_target": "anthropic/claude-opus-4-7",
+  "codex_target": "openai-codex/gpt-5.5",
+  "log_path": "/home/uniceadmin/.openclaw/logs/routing.jsonl",
+  "_known_issues": {
+    "image_attachment_routing": {
+      "status": "deferred",
+      "symptom": "event.attachments comes through empty for Discord image messages despite image being processed downstream",
+      "impact": "images route to default chain instead of kimi-k2.5; functional but suboptimal",
+      "investigation_needed": [
+        "trace where Discord populates params.images vs event.attachments in message-handler.preflight",
+        "check if media-understanding capability bypasses before_model_resolve hook entirely",
+        "may need a different hook (before_agent_start?) that sees media params"
+      ],
+      "workaround": "none active; falls through to default"
+    },
+    "discord_slash_intercept": {
+      "status": "fixed",
+      "fix_applied": "switched from /debug to debug: and longrun: prefixes",
+      "note": "Discord gateway preflight intercepts all slash commands before before_model_resolve fires"
+    },
+    "customer_facing_no_reply": {
+      "status": "deferred",
+      "symptom": "Opus 4.7 returned NO_REPLY sentinel on 'test routing' in #landlit, suppressing the Discord delivery despite successful routing",
+      "impact": "customers in #landlit/#what-was-drawn would see no response on prompts Opus deems unnecessary to reply to",
+      "fix_path": "agent system-prompt addition for customer_facing_channel_ids: 'You are customer-facing. Always reply substantively. NO_REPLY sentinel is disallowed in these channels.'",
+      "investigation_needed": "find which agent persona file governs replies for these channelIds; modify there, not in the routing plugin"
+    },
+    "opus_cold_start_cache_write": {
+      "status": "noted",
+      "observation": "First Opus call per channel writes 39k tokens to cache ($0.245 sticker, OAuth quota-counted)",
+      "impact": "no $$ leak, but eats Max OAuth quota faster than necessary if many channels cold-start",
+      "investigation_later": "audit what's in the 39k system prompt; trim if possible"
+    }
+  },
+  "_validation_rule": "OAuth path MUST be confirmed via log evidence ('resolved oauth credential', 'used external cli oauth bootstrap'). ANTHROPIC_API_KEY MUST remain absent from daemon env. Cost field is informational sticker pricing \u2014 track for awareness but don't gate on it.",
+  "_ollama_migration_deadline": "2026-05-21 \u2014 Ollama Pro subscription expires. On/before 2026-05-20: swap routing+fallbacks off Ollama. New fallback chain target: codex \u2192 minimax/MiniMax-M2.7 \u2192 anthropic/claude-opus-4-7. New debug:/longrun: target: anthropic/claude-opus-4-7. New image_attachment_target: minimax/MiniMax-VL-01. Cron scripts using kimi (create-diary*.py) keep using Ollama free tier; refactor to MiniMax only if rate limits bite.",
+  "_project_sync_note": "Projects synced from Mac via rsync. Local paths above. Missing: ninja-listener and pocket-ninja dirs created empty \u2014 need content."
+}

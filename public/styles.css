@@ -1,0 +1,249 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #15120e;
+  color: #f8efe0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(340px, 420px);
+  gap: 16px;
+  align-items: stretch;
+  overflow: auto;
+  padding: 16px;
+  background:
+    linear-gradient(180deg, rgba(21, 18, 14, 0.2), rgba(21, 18, 14, 0.85)),
+    radial-gradient(circle at 50% 28%, #344f45 0, #1d2f2c 42%, #15120e 78%);
+}
+
+.stage {
+  position: relative;
+  min-width: 0;
+  min-height: calc(100vh - 32px);
+  display: grid;
+  place-items: center;
+}
+
+canvas {
+  width: min(100%, 1600px);
+  height: auto;
+  aspect-ratio: 16 / 9;
+  display: block;
+}
+
+.hud {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: 20px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  pointer-events: none;
+}
+
+.hud div {
+  min-width: 0;
+  border: 1px solid rgba(248, 239, 224, 0.24);
+  background: rgba(21, 18, 14, 0.72);
+  padding: 12px 14px;
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+}
+
+.hud span,
+.hud strong {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.hud span {
+  color: #d6c3a1;
+  font-size: 12px;
+}
+
+.hud strong {
+  color: #fff8eb;
+  font-size: 18px;
+  margin-top: 2px;
+}
+
+.operator {
+  min-height: calc(100vh - 32px);
+  max-height: calc(100vh - 32px);
+  overflow: auto;
+  border: 1px solid rgba(248, 239, 224, 0.2);
+  background: rgba(21, 18, 14, 0.76);
+  border-radius: 8px;
+  padding: 14px;
+  backdrop-filter: blur(14px);
+}
+
+.operator section,
+.mission-form {
+  border-bottom: 1px solid rgba(248, 239, 224, 0.14);
+  padding-bottom: 14px;
+  margin-bottom: 14px;
+}
+
+.operator section:last-child {
+  border-bottom: 0;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.operator h2,
+.mission-form label {
+  display: block;
+  margin: 0 0 10px;
+  color: #fff8eb;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+textarea,
+select,
+button {
+  width: 100%;
+  border: 1px solid rgba(248, 239, 224, 0.22);
+  border-radius: 8px;
+  background: rgba(10, 9, 7, 0.68);
+  color: #fff8eb;
+  font: inherit;
+}
+
+textarea {
+  min-height: 96px;
+  resize: vertical;
+  padding: 10px;
+}
+
+select,
+button {
+  min-height: 40px;
+  padding: 0 10px;
+}
+
+button {
+  cursor: pointer;
+  border-color: rgba(125, 199, 142, 0.45);
+  background: #245c3d;
+  font-weight: 700;
+}
+
+button:hover,
+button:focus-visible {
+  background: #2f754e;
+}
+
+button.reject {
+  border-color: rgba(232, 111, 91, 0.5);
+  background: #74312c;
+}
+
+button.reject:hover,
+button.reject:focus-visible {
+  background: #8c3b34;
+}
+
+button:disabled {
+  cursor: wait;
+  opacity: 0.62;
+}
+
+.form-row,
+.mission-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+#form-status {
+  min-height: 18px;
+  margin: 8px 0 0;
+  color: #d6c3a1;
+  font-size: 13px;
+}
+
+.mission-list,
+.receipt-list,
+.event-list {
+  display: grid;
+  gap: 8px;
+}
+
+.mission-card,
+.receipt-card,
+.event-card {
+  min-width: 0;
+  border: 1px solid rgba(248, 239, 224, 0.16);
+  border-radius: 8px;
+  background: rgba(10, 9, 7, 0.48);
+  padding: 10px;
+}
+
+.mission-title,
+.receipt-title,
+.event-title {
+  overflow-wrap: anywhere;
+  color: #fff8eb;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.mission-meta,
+.receipt-meta,
+.event-meta {
+  margin-top: 4px;
+  overflow-wrap: anywhere;
+  color: #d6c3a1;
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.empty {
+  color: #d6c3a1;
+  font-size: 13px;
+}
+
+@media (max-width: 900px) {
+  .shell {
+    grid-template-columns: 1fr;
+    padding: 10px;
+  }
+
+  .stage,
+  .operator {
+    min-height: auto;
+    max-height: none;
+  }
+
+  .hud {
+    position: static;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 10px;
+  }
+}
+
+@media (max-width: 520px) {
+  .hud,
+  .form-row,
+  .mission-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .hud strong {
+    font-size: 15px;
+  }
+}

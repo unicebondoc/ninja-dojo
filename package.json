@@ -1,0 +1,19 @@
+{
+  "name": "ninja-dojo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev:dojo": "bash scripts/run-loop.sh",
+    "test:curl": "bash scripts/curl-tests.sh",
+    "test:screenshot": "node scripts/screenshot.mjs"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "playwright": "^1.49.1"
+  }
+}

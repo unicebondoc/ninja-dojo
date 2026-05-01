@@ -1,0 +1,93 @@
+--- /home/uniceadmin/.openclaw/extensions/openclaw-routing/index.js
++++ scripts/pr1b-risky/openclaw-routing-index.js
+@@ -3,11 +3,13 @@
+ 
+ const CONFIG_PATH = `${homedir()}/ninja-clan/agent-teams/routing-config.json`;
+ const CUSTOMER_FACING_PROMPT_PATH = `${homedir()}/ninja-clan/agent-teams/skills/customer-facing.txt`;
++const DOJO_BRIDGE_URL = "http://127.0.0.1:3458/api/openclaw/bridge";
+ 
+ const FALLBACK_CONFIG = {
+   customer_facing_channel_ids: [],
+   codex_channel_ids: [],
+   channel_project_paths: {},
++  dojo_mission_prefixes: [],
+ };
+ 
+ function loadConfig() {
+@@ -57,6 +59,51 @@
+   }
+ }
+ 
++function extractDojoMission(text, cfg) {
++  const body = String(text ?? "").trim();
++  for (const prefix of cfg.dojo_mission_prefixes ?? []) {
++    const value = String(prefix ?? "").trim();
++    if (!value) continue;
++    if (body.toLowerCase().startsWith(value.toLowerCase())) {
++      return body.slice(value.length).trim();
++    }
++  }
++  return null;
++}
++
++async function dispatchDojoMission(event, ctx) {
++  const cfg = loadConfig();
++  const missionText = extractDojoMission(event?.content ?? event?.body ?? "", cfg);
++  if (!missionText) return null;
++
++  const response = await fetch(DOJO_BRIDGE_URL, {
++    method: "POST",
++    headers: { "content-type": "application/json" },
++    body: JSON.stringify({
++      content: missionText,
++      channel: event?.channel,
++      channelId: ctx?.channelId ?? event?.conversationId ?? null,
++      conversationId: event?.conversationId ?? null,
++      messageId: event?.messageId ?? ctx?.messageId ?? null,
++      sender: event?.senderName ?? event?.senderUsername ?? null,
++      senderId: event?.senderId ?? ctx?.senderId ?? null,
++      surface: event?.channel ?? "discord"
++    }),
++    signal: AbortSignal.timeout(2500)
++  });
++
++  if (!response.ok) {
++    throw new Error(`Dojo bridge returned HTTP ${response.status}`);
++  }
++
++  const payload = await response.json();
++  const missionId = payload?.mission?.id || "created";
++  return {
++    handled: true,
++    reply: { text: `🥷 Mission #${missionId} dispatched` }
++  };
++}
++
+ const routingPlugin = {
+   id: "openclaw-routing",
+   name: "OpenClaw Routing",
+@@ -68,6 +115,14 @@
+       return;
+     }
+ 
++    api.on("inbound_claim", async (event, ctx) => {
++      try {
++        return await dispatchDojoMission(event, ctx);
++      } catch (err) {
++        console.error("[openclaw-routing] dojo bridge dispatch failed; falling through:", err?.message ?? err);
++      }
++    }, { priority: 100 });
++
+     // Inject project context (AGENTS.md) + customer-facing system prompt for Discord channels
+     // Also handle codex channel routing via before_model_resolve
+     api.on("before_model_resolve", (event, ctx) => {
+--- /home/uniceadmin/ninja-clan/agent-teams/routing-config.json
++++ scripts/pr1b-risky/routing-config.json
+@@ -48,6 +48,7 @@
+     "debug:",
+     "longrun:"
+   ],
++  "dojo_mission_prefixes": ["mission:"],
+   "default_chain_documentation": [
+     "Informational only. Authoritative chain lives in agents.defaults.model in openclaw.json.",
+     "Plugin returns no override for default case; agents.defaults.model.primary fires.",
