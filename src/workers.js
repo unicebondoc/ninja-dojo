@@ -1,7 +1,12 @@
-// PR1 still uses canned workers. Real Codex/Claude execution is later v2 scope.
+// PR3 runs canned workers through the real Dojo queue. Real Codex/Claude execution is later v2 scope.
 export async function executeWorker(task) {
+  await delay(Number(process.env.DOJO_STUB_WORKER_DELAY_MS || 350));
   if (task.agent === "claude") return claudeReceipt(task);
   return codexReceipt(task);
+}
+
+function delay(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 function codexReceipt(task) {

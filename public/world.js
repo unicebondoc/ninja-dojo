@@ -4,6 +4,7 @@ const missionForm = document.querySelector("#mission-form");
 const missionScroll = document.querySelector("#mission-scroll");
 const missionAgent = document.querySelector("#mission-agent");
 const formStatus = document.querySelector("#form-status");
+const runLoopList = document.querySelector("#run-loop-list");
 const pendingList = document.querySelector("#pending-list");
 const missionList = document.querySelector("#mission-list");
 const receiptList = document.querySelector("#receipt-list");
@@ -11,6 +12,7 @@ const eventList = document.querySelector("#event-list");
 
 let state = { version: 0, zones: [], personas: [], missions: [], receipts: [], events: [] };
 let openClawStatus = { online: false, jobsRunning: 0, lastError: null, lastChecked: null };
+let runLoop = { active: [], activeCount: 0, maxParallel: 1, queued: [], queuedCount: 0 };
 let missionSprite = null;
 let reconnectTimer = null;
 
@@ -58,6 +60,17 @@ function connectSocket() {
       state = event.payload;
       updateCockpit();
       return;
+    }
+
+    if (event.type === "runloop.snapshot") {
+      runLoop = event.payload;
+      updateCockpit();
+      return;
+    }
+
+    if (event.runLoop) {
+      runLoop = event.runLoop;
+      updateCockpit();
     }
 
     if (event.worldVersion && event.worldVersion > (state.version || 0)) {
@@ -135,6 +148,7 @@ async function handleMissionAction(event) {
 
 function updateCockpit() {
   updateHud();
+  renderRunLoop();
   renderPendingMissions();
   renderRecentMissions();
   renderReceipts();
@@ -144,9 +158,16 @@ function updateCockpit() {
 function updateHud() {
   document.querySelector("#mission-count").textContent = `${state.missions.length} missions`;
   document.querySelector("#receipt-count").textContent = `${state.receipts.length} receipts`;
-  document.querySelector("#worker-state").textContent = state.missions[0]?.status ?? "idle";
+  document.querySelector("#worker-state").textContent = workerStateLabel();
   const openClaw = document.querySelector("#openclaw-state");
   if (openClaw) openClaw.textContent = statusLabel();
+}
+
+function renderRunLoop() {
+  const active = runLoop.active.map((id) => runCard(id, "running"));
+  const queued = runLoop.queued.map((id) => runCard(id, "queued"));
+  const items = [...active, ...queued].slice(0, 6);
+  replaceChildren(runLoopList, items.length ? items : [emptyNode("No worker runs active.")]);
 }
 
 function renderPendingMissions() {
@@ -167,6 +188,16 @@ function renderReceipts() {
 function renderEvents() {
   const events = state.events.slice(0, 8);
   replaceChildren(eventList, events.length ? events.map(eventCard) : [emptyNode("No lifecycle events yet.")]);
+}
+
+function runCard(missionId, status) {
+  const mission = state.missions.find((item) => item.id === missionId);
+  const card = el("article", "mission-card");
+  card.append(
+    textBlock("div", "mission-title", mission?.summary || missionId),
+    textBlock("div", "mission-meta", `${missionId} | ${mission?.agent || "worker"} | ${status}`)
+  );
+  return card;
 }
 
 function missionCard(mission, withActions) {
@@ -449,6 +480,12 @@ function statusTone() {
   if (!openClawStatus.online) return "offline";
   if (openClawStatus.lastError) return "degraded";
   return "online";
+}
+
+function workerStateLabel() {
+  if (runLoop.activeCount) return `${runLoop.activeCount} running`;
+  if (runLoop.queuedCount) return `${runLoop.queuedCount} queued`;
+  return state.missions[0]?.status ?? "idle";
 }
 
 function statusLabel() {

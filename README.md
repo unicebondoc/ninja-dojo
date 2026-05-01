@@ -29,6 +29,14 @@ Server binds `127.0.0.1:3458`. The run-loop script reuses a healthy local server
 - `npm run test:curl` covers health, static cockpit markup, REST endpoints, OpenClaw bridge commands, and restores `data/world.json` after the smoke run.
 - `npm run test:screenshot` captures the cockpit with Playwright.
 
+## PR3 worker run loop
+
+- Approval now moves missions through `queued`, `worker_running`, and `receipt_ready` instead of returning a synchronous receipt.
+- `GET /api/runs/status` exposes active and queued worker runs.
+- WebSocket mission events include run-loop snapshots so the cockpit can show live queue state.
+- Queued or interrupted worker runs are requeued when the local server restarts.
+- Stub Codex/Claude workers still return canned receipts, but they now execute through the same queue path intended for real workers.
+
 ## PR1 OpenClaw bridge
 
 OpenClaw can route Discord/channel messages into Dojo through either bridge endpoint:

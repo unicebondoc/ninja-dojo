@@ -1,5 +1,3 @@
-import { executeWorker } from "./workers.js";
-
 let lastMissionStamp = "";
 let missionSequence = 0;
 
@@ -21,13 +19,14 @@ export function createMission(input = {}) {
     createdAt: now.toISOString(),
     events: [],
     receipts: [],
+    run: null,
     source: input.source ?? null,
     scroll,
     status: "needs_approval",
     summary,
     task: {
       agent,
-      context: input.context || "Ninja Dojo v2 PR1 OpenClaw bridge execution.",
+      context: input.context || "Ninja Dojo v2 OpenClaw bridge execution.",
       department: agent === "claude" ? "auditor" : "builder",
       id: `${agent}-${id}`,
       prompt: scroll,
@@ -39,14 +38,15 @@ export function createMission(input = {}) {
   };
 }
 
-export async function approveMission(mission, input = {}) {
-  if (!mission) {
-    const error = new Error("Mission not found.");
-    error.statusCode = 404;
-    throw error;
-  }
+export function approveMission(mission, input = {}) {
+  assertMission(mission);
   if (mission.approval?.status === "rejected") {
     const error = new Error("Mission was rejected and cannot be approved.");
+    error.statusCode = 409;
+    throw error;
+  }
+  if (mission.approval?.status === "approved") {
+    const error = new Error("Mission was already approved.");
     error.statusCode = 409;
     throw error;
   }
@@ -56,33 +56,76 @@ export async function approveMission(mission, input = {}) {
     ...mission.approval,
     decidedAt,
     decidedBy: input.decidedBy || "Master",
-    notes: input.notes || "Approved through PR0 endpoint.",
+    notes: input.notes || "Approved through Dojo cockpit.",
     status: "approved"
   };
-  mission.status = "approved";
+  mission.run = {
+    id: `run-${mission.id}`,
+    missionId: mission.id,
+    queuedAt: decidedAt,
+    startedAt: null,
+    completedAt: null,
+    failedAt: null,
+    status: "queued"
+  };
+  mission.status = "queued";
   mission.updatedAt = decidedAt;
+  return { mission };
+}
 
-  const receipt = await executeWorker(mission.task);
+export function startMissionRun(mission) {
+  assertMission(mission);
+  if (mission.status !== "queued" || mission.run?.status !== "queued") return { mission, started: false };
+
+  const startedAt = new Date().toISOString();
+  mission.run = {
+    ...mission.run,
+    startedAt,
+    status: "running"
+  };
+  mission.status = "worker_running";
+  mission.updatedAt = startedAt;
+  return { mission, started: true };
+}
+
+export function completeMissionRun(mission, receipt) {
+  assertMission(mission);
+  const createdAt = new Date().toISOString();
   const fullReceipt = {
     ...receipt,
-    createdAt: new Date().toISOString(),
+    createdAt,
     id: `receipt-${mission.id}-${receipt.agent}`,
     missionId: mission.id
   };
   mission.receipts = [fullReceipt, ...(mission.receipts || [])];
+  mission.run = {
+    ...(mission.run || { id: `run-${mission.id}`, missionId: mission.id }),
+    completedAt: createdAt,
+    status: "completed"
+  };
   mission.status = "receipt_ready";
-  mission.updatedAt = fullReceipt.createdAt;
+  mission.updatedAt = createdAt;
   return { mission, receipt: fullReceipt };
 }
 
+export function failMissionRun(mission, error) {
+  assertMission(mission);
+  const failedAt = new Date().toISOString();
+  mission.run = {
+    ...(mission.run || { id: `run-${mission.id}`, missionId: mission.id }),
+    error: error?.message || "Worker failed.",
+    failedAt,
+    status: "failed"
+  };
+  mission.status = "failed";
+  mission.updatedAt = failedAt;
+  return { mission };
+}
+
 export function rejectMission(mission, input = {}) {
-  if (!mission) {
-    const error = new Error("Mission not found.");
-    error.statusCode = 404;
-    throw error;
-  }
-  if (mission.status === "receipt_ready" || mission.approval?.status === "approved") {
-    const error = new Error("Mission was already approved and cannot be rejected.");
+  assertMission(mission);
+  if (mission.status !== "needs_approval" || mission.approval?.status === "approved") {
+    const error = new Error("Mission is no longer pending approval and cannot be rejected.");
     error.statusCode = 409;
     throw error;
   }
@@ -107,12 +150,26 @@ export function missionEventsForCreate(mission) {
   ];
 }
 
-export function missionEventsForApproval(mission, receipt) {
+export function missionEventsForApproval(mission) {
   return [
     lifecycle("approval.approved", mission, "CEO approval gate opened."),
+    lifecycle("mission.queued", mission, `${mission.agent} worker run queued.`)
+  ];
+}
+
+export function missionEventsForRunStart(mission) {
+  return [lifecycle("mission.worker_running", mission, `${mission.agent} worker run started.`)];
+}
+
+export function missionEventsForReceipt(mission, receipt) {
+  return [
     lifecycle("mission.stage_changed", mission, `${receipt.agent} stub worker completed.`),
     lifecycle("mission.receipt_ready", mission, receipt.summary)
   ];
+}
+
+export function missionEventsForFailure(mission) {
+  return [lifecycle("mission.failed", mission, mission.run?.error || "Worker failed.")];
 }
 
 export function missionEventsForRejection(mission) {
@@ -131,11 +188,21 @@ export function lifecycle(type, mission, message) {
       agent: mission.agent,
       missionId: mission.id,
       missionName: mission.summary,
+      runId: mission.run?.id ?? null,
+      runStatus: mission.run?.status ?? null,
       status: mission.status
     },
     type,
     emittedAt: new Date().toISOString()
   };
+}
+
+function assertMission(mission) {
+  if (!mission) {
+    const error = new Error("Mission not found.");
+    error.statusCode = 404;
+    throw error;
+  }
 }
 
 function makeMissionId(date) {

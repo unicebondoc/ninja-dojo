@@ -14,11 +14,27 @@ cleanup() {
 }
 trap cleanup EXIT
 
+wait_for_receipt() {
+  local mission_id="$1"
+  local expected_agent="$2"
+  for _ in {1..40}; do
+    local result
+    result=$(curl -fsS "$BASE/api/missions/$mission_id" | node -e 'let s="";process.stdin.on("data",d=>s+=d);process.stdin.on("end",()=>{const j=JSON.parse(s); const m=j.mission; if(m.status==="receipt_ready" && m.receipts?.[0]?.id) console.log(`${m.status} ${m.receipts[0].agent}`); else console.log(m.status)})')
+    if [[ "$result" == "receipt_ready $expected_agent" ]]; then
+      echo "$result"
+      return 0
+    fi
+    sleep 0.2
+  done
+  echo "timed out waiting for $mission_id receipt" >&2
+  return 1
+}
+
 echo "GET /api/health"
 curl -fsS "$BASE/api/health" | node -e 'let s="";process.stdin.on("data",d=>s+=d);process.stdin.on("end",()=>{const j=JSON.parse(s); if(j.ok!==true || j.service!=="ninja-dojo") process.exit(1); console.log(j.service)})'
 
 echo "GET /"
-curl -fsS "$BASE/" | node -e 'let s="";process.stdin.on("data",d=>s+=d);process.stdin.on("end",()=>{if(!s.includes("id=\"mission-form\"") || !s.includes("id=\"pending-list\"")) process.exit(1); console.log("cockpit")})'
+curl -fsS "$BASE/" | node -e 'let s="";process.stdin.on("data",d=>s+=d);process.stdin.on("end",()=>{if(!s.includes("id=\"mission-form\"") || !s.includes("id=\"run-loop-list\"") || !s.includes("id=\"pending-list\"")) process.exit(1); console.log("cockpit")})'
 
 echo "GET /api/world"
 curl -fsS "$BASE/api/world" | node -e 'let s="";process.stdin.on("data",d=>s+=d);process.stdin.on("end",()=>{const j=JSON.parse(s); if(!Array.isArray(j.zones)||!j.zones.find(z=>z.id==="openclaw-tower")) process.exit(1); console.log(`zones=${j.zones.length}`)})'
@@ -26,21 +42,25 @@ curl -fsS "$BASE/api/world" | node -e 'let s="";process.stdin.on("data",d=>s+=d)
 echo "GET /api/openclaw/status"
 curl -fsS "$BASE/api/openclaw/status" | node -e 'let s="";process.stdin.on("data",d=>s+=d);process.stdin.on("end",()=>{const j=JSON.parse(s); if(typeof j.online!=="boolean" || typeof j.jobsRunning!=="number" || !j.lastChecked) process.exit(1); console.log(`online=${j.online} jobs=${j.jobsRunning}`)})'
 
+echo "GET /api/runs/status"
+curl -fsS "$BASE/api/runs/status" | node -e 'let s="";process.stdin.on("data",d=>s+=d);process.stdin.on("end",()=>{const j=JSON.parse(s); if(!Array.isArray(j.active)||!Array.isArray(j.queued)||typeof j.maxParallel!=="number") process.exit(1); console.log(`active=${j.activeCount} queued=${j.queuedCount}`)})'
+
 echo "GET /api/missions"
 curl -fsS "$BASE/api/missions" | node -e 'let s="";process.stdin.on("data",d=>s+=d);process.stdin.on("end",()=>{const j=JSON.parse(s); if(!Array.isArray(j.missions)) process.exit(1); console.log(`missions=${j.missions.length}`)})'
 
 echo "POST /api/missions"
 MISSION_ID=$(curl -fsS -X POST "$BASE/api/missions" \
   -H 'content-type: application/json' \
-  -d '{"scroll":"PR0 curl test mission","agent":"codex"}' \
+  -d '{"scroll":"PR3 curl test mission","agent":"codex"}' \
   | node -e 'let s="";process.stdin.on("data",d=>s+=d);process.stdin.on("end",()=>{const j=JSON.parse(s); if(!j.mission?.id || j.mission.approval.status!=="pending") process.exit(1); console.log(j.mission.id)})')
 echo "mission=$MISSION_ID"
 
-echo "POST /api/missions/:id/approve"
+echo "POST /api/missions/:id/approve queues run"
 curl -fsS -X POST "$BASE/api/missions/$MISSION_ID/approve" \
   -H 'content-type: application/json' \
   -d '{"decidedBy":"curl-test","notes":"approve endpoint smoke"}' \
-  | node -e 'let s="";process.stdin.on("data",d=>s+=d);process.stdin.on("end",()=>{const j=JSON.parse(s); if(j.mission.status!=="receipt_ready" || !j.receipt?.id) process.exit(1); console.log(`${j.mission.status} ${j.receipt.agent}`)})'
+  | node -e 'let s="";process.stdin.on("data",d=>s+=d);process.stdin.on("end",()=>{const j=JSON.parse(s); if(j.mission.status!=="queued" || j.mission.run?.status!=="queued") process.exit(1); console.log(`${j.mission.status} ${j.mission.agent}`)})'
+wait_for_receipt "$MISSION_ID" "codex"
 
 echo "POST /api/openclaw/messages mission"
 BRIDGE_MISSION_ID=$(curl -fsS -X POST "$BASE/api/openclaw/messages" \
@@ -49,17 +69,18 @@ BRIDGE_MISSION_ID=$(curl -fsS -X POST "$BASE/api/openclaw/messages" \
   | node -e 'let s="";process.stdin.on("data",d=>s+=d);process.stdin.on("end",()=>{const j=JSON.parse(s); if(j.bridge?.status!=="mission_created" || j.mission?.source?.bridge!=="openclaw") process.exit(1); console.log(j.mission.id)})')
 echo "bridge_mission=$BRIDGE_MISSION_ID"
 
-echo "POST /api/openclaw/messages approve command"
+echo "POST /api/openclaw/messages approve command queues run"
 curl -fsS -X POST "$BASE/api/openclaw/messages" \
   -H 'content-type: application/json' \
   -d "{\"content\":\"/dojo approve $BRIDGE_MISSION_ID\",\"sender\":\"curl-test\"}" \
-  | node -e 'let s="";process.stdin.on("data",d=>s+=d);process.stdin.on("end",()=>{const j=JSON.parse(s); if(j.bridge?.status!=="mission_approved" || j.mission.status!=="receipt_ready" || j.receipt.agent!=="claude") process.exit(1); console.log(`${j.bridge.status} ${j.receipt.agent}`)})'
+  | node -e 'let s="";process.stdin.on("data",d=>s+=d);process.stdin.on("end",()=>{const j=JSON.parse(s); if(j.bridge?.status!=="mission_queued" || j.mission.status!=="queued") process.exit(1); console.log(`${j.bridge.status} ${j.mission.agent}`)})'
+wait_for_receipt "$BRIDGE_MISSION_ID" "claude"
 
 echo "POST /api/openclaw/messages status command"
 curl -fsS -X POST "$BASE/api/openclaw/messages" \
   -H 'content-type: application/json' \
   -d '{"content":"/dojo status"}' \
-  | node -e 'let s="";process.stdin.on("data",d=>s+=d);process.stdin.on("end",()=>{const j=JSON.parse(s); if(j.bridge?.type!=="status" || typeof j.status?.missions!=="number") process.exit(1); console.log(`missions=${j.status.missions}`)})'
+  | node -e 'let s="";process.stdin.on("data",d=>s+=d);process.stdin.on("end",()=>{const j=JSON.parse(s); if(j.bridge?.type!=="status" || typeof j.status?.missions!=="number" || typeof j.runLoop?.activeCount!=="number") process.exit(1); console.log(`missions=${j.status.missions}`)})'
 
 echo "POST /api/openclaw/messages reject command"
 REJECT_MISSION_ID=$(curl -fsS -X POST "$BASE/api/openclaw/messages" \
