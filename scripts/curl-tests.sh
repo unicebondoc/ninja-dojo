@@ -34,10 +34,10 @@ echo "GET /api/health"
 curl -fsS "$BASE/api/health" | node -e 'let s="";process.stdin.on("data",d=>s+=d);process.stdin.on("end",()=>{const j=JSON.parse(s); if(j.ok!==true || j.service!=="ninja-dojo") process.exit(1); console.log(j.service)})'
 
 echo "GET /"
-curl -fsS "$BASE/" | node -e 'let s="";process.stdin.on("data",d=>s+=d);process.stdin.on("end",()=>{if(!s.includes("id=\"mission-form\"") || !s.includes("id=\"run-loop-list\"") || !s.includes("id=\"pending-list\"")) process.exit(1); console.log("cockpit")})'
+curl -fsS "$BASE/" | node -e 'let s="";process.stdin.on("data",d=>s+=d);process.stdin.on("end",()=>{if(!s.includes("id=\"game\"") || !s.includes("/vendor/phaser.min.js") || !s.includes("/js/village/main.js")) process.exit(1); console.log("village")})'
 
 echo "GET /api/world"
-curl -fsS "$BASE/api/world" | node -e 'let s="";process.stdin.on("data",d=>s+=d);process.stdin.on("end",()=>{const j=JSON.parse(s); if(!Array.isArray(j.zones)||!j.zones.find(z=>z.id==="openclaw-tower")) process.exit(1); console.log(`zones=${j.zones.length}`)})'
+curl -fsS "$BASE/api/world" | node -e 'let s="";process.stdin.on("data",d=>s+=d);process.stdin.on("end",()=>{const j=JSON.parse(s); if(!Array.isArray(j.zones)||!Array.isArray(j.missions)||typeof j.version!=="number") process.exit(1); console.log(`missions=${j.missions.length}`)})'
 
 echo "GET /api/openclaw/status"
 curl -fsS "$BASE/api/openclaw/status" | node -e 'let s="";process.stdin.on("data",d=>s+=d);process.stdin.on("end",()=>{const j=JSON.parse(s); if(typeof j.online!=="boolean" || typeof j.jobsRunning!=="number" || !j.lastChecked) process.exit(1); console.log(`online=${j.online} jobs=${j.jobsRunning}`)})'

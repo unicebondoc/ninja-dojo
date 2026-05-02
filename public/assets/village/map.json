@@ -1,0 +1,9 @@
+{
+  "type": "programmatic",
+  "orientation": "3/4-isometric",
+  "tileWidth": 64,
+  "tileHeight": 32,
+  "grid": { "width": 18, "height": 13 },
+  "source": "/public/js/village/data/village-layout.js",
+  "note": "PR1 uses programmatic tile placement because the map is small and event-driven positions are easier to keep near the entity configs."
+}

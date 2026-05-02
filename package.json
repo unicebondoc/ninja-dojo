@@ -10,7 +10,9 @@
     "test:screenshot": "node scripts/screenshot.mjs"
   },
   "dependencies": {
+    "easystarjs": "^0.4.4",
     "express": "^4.19.2",
+    "phaser": "^3.90.0",
     "ws": "^8.18.0"
   },
   "devDependencies": {
