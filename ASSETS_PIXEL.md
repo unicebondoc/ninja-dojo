@@ -313,3 +313,65 @@ Generator fallback for transparency: if transparent background is not supported,
 ```
 
 ## PR 2.3 - Cutaway Interiors
+
+### Phase 2.3-1 - Hut Interior Sprites
+
+#### public/assets/dojo/interiors/moji_interior.png
+
+```text
+Modern detailed pixel art top-down view, strict overhead camera like a floor-plan map tile. Interior of Moji scroll hut interior WITH ROOF REMOVED. Show the inside from above: floor tiles, low interior wall footprint, writing desk with brush and ink, scroll racks, oil lamp, floor cushion. 192x192 pixels, transparent background. Sea of Stars / Persona 5 aesthetic. Matches public/assets/dojo/checkpoints/STYLE_ANCHOR_PIXEL.png and overlays under the matching 192x192 hut exterior.
+
+No roof visible. No front-facing walls, no isometric angle, no 3/4 angle. No characters. Keep important props inside the hut footprint with transparent space around the outside.
+
+Generator fallback for transparency: if transparent background is not supported, place only the outside/background matte on pure bright magenta (#ff00ff) or a standard transparency checkerboard so it can be removed cleanly after generation. Do not use magenta inside the props or floor.
+```
+
+#### public/assets/dojo/interiors/miji_interior.png
+
+```text
+Modern detailed pixel art top-down view, strict overhead camera like a floor-plan map tile. Interior of Miji forge interior WITH ROOF REMOVED. Show the inside from above: floor tiles, low interior wall footprint, anvil and hammer, fire pit with glowing coals, weapon rack, bellows. 192x192 pixels, transparent background. Sea of Stars / Persona 5 aesthetic. Matches public/assets/dojo/checkpoints/STYLE_ANCHOR_PIXEL.png and overlays under the matching 192x192 hut exterior.
+
+No roof visible. No front-facing walls, no isometric angle, no 3/4 angle. No characters. Keep important props inside the hut footprint with transparent space around the outside.
+
+Generator fallback for transparency: if transparent background is not supported, place only the outside/background matte on pure bright magenta (#ff00ff) or a standard transparency checkerboard so it can be removed cleanly after generation. Do not use magenta inside the props or floor.
+```
+
+#### public/assets/dojo/interiors/maji_interior.png
+
+```text
+Modern detailed pixel art top-down view, strict overhead camera like a floor-plan map tile. Interior of Maji dojo interior WITH ROOF REMOVED. Show the inside from above: floor tiles, low interior wall footprint, katana weapon rack, practice posts, tatami floor pattern, training scroll wall. 192x192 pixels, transparent background. Sea of Stars / Persona 5 aesthetic. Matches public/assets/dojo/checkpoints/STYLE_ANCHOR_PIXEL.png and overlays under the matching 192x192 hut exterior.
+
+No roof visible. No front-facing walls, no isometric angle, no 3/4 angle. No characters. Keep important props inside the hut footprint with transparent space around the outside.
+
+Generator fallback for transparency: if transparent background is not supported, place only the outside/background matte on pure bright magenta (#ff00ff) or a standard transparency checkerboard so it can be removed cleanly after generation. Do not use magenta inside the props or floor.
+```
+
+#### public/assets/dojo/interiors/meji_interior.png
+
+```text
+Modern detailed pixel art top-down view, strict overhead camera like a floor-plan map tile. Interior of Meji tea house interior WITH ROOF REMOVED. Show the inside from above: floor tiles, low interior wall footprint, tea kettle on hearth, low table with bowls, hanging herbs, soft cushions. 192x192 pixels, transparent background. Sea of Stars / Persona 5 aesthetic. Matches public/assets/dojo/checkpoints/STYLE_ANCHOR_PIXEL.png and overlays under the matching 192x192 hut exterior.
+
+No roof visible. No front-facing walls, no isometric angle, no 3/4 angle. No characters. Keep important props inside the hut footprint with transparent space around the outside.
+
+Generator fallback for transparency: if transparent background is not supported, place only the outside/background matte on pure bright magenta (#ff00ff) or a standard transparency checkerboard so it can be removed cleanly after generation. Do not use magenta inside the props or floor.
+```
+
+#### public/assets/dojo/interiors/muji_interior.png
+
+```text
+Modern detailed pixel art top-down view, strict overhead camera like a floor-plan map tile. Interior of Muji launch pad workshop interior WITH ROOF REMOVED. Show the inside from above: floor tiles, low interior wall footprint, workbench with blueprints, rocket parts, gears, scaffolding. 192x192 pixels, transparent background. Sea of Stars / Persona 5 aesthetic. Matches public/assets/dojo/checkpoints/STYLE_ANCHOR_PIXEL.png and overlays under the matching 192x192 hut exterior.
+
+No roof visible. No front-facing walls, no isometric angle, no 3/4 angle. No characters. Keep important props inside the hut footprint with transparent space around the outside.
+
+Generator fallback for transparency: if transparent background is not supported, place only the outside/background matte on pure bright magenta (#ff00ff) or a standard transparency checkerboard so it can be removed cleanly after generation. Do not use magenta inside the props or floor.
+```
+
+#### public/assets/dojo/interiors/meowts_interior.png
+
+```text
+Modern detailed pixel art top-down view, strict overhead camera like a floor-plan map tile. Interior of Meowts shrine interior WITH ROOF REMOVED. Show the inside from above: floor tiles, low interior wall footprint, altar with hovering scroll, cat statues, incense burner, sake bottles. 192x192 pixels, transparent background. Sea of Stars / Persona 5 aesthetic. Matches public/assets/dojo/checkpoints/STYLE_ANCHOR_PIXEL.png and overlays under the matching 192x192 hut exterior.
+
+No roof visible. No front-facing walls, no isometric angle, no 3/4 angle. No characters. Keep important props inside the hut footprint with transparent space around the outside.
+
+Generator fallback for transparency: if transparent background is not supported, place only the outside/background matte on pure bright magenta (#ff00ff) or a standard transparency checkerboard so it can be removed cleanly after generation. Do not use magenta inside the props or floor.
+```
