@@ -54,3 +54,53 @@ Modern detailed pixel art top-down character sprite. Female ninja girl viewed fr
 Generator fallback for transparency: if transparent background is not supported, place only the outside/background matte on pure bright magenta (#ff00ff) or a standard transparency checkerboard so it can be removed cleanly after generation. Do not use magenta in the sprite itself.
 ```
 
+### Phase 2.1-2 - Six Hut Sprites
+
+#### public/assets/dojo/huts/moji_scroll_hut.png
+
+```text
+Modern detailed pixel art top-down view, strict overhead camera like a floor-plan map tile. Moji scroll hut, small Japanese ninja hut with lavender purple rectangular thatched roof tiles, wooden frame edges, south porch platform, scroll racks visible near the porch, tiny paper lanterns at roof corners, compact grass clearing and soft drop shadow beneath. Only roof footprint, porch footprint, and top-down props are visible. No front-facing wall, no door facade, no 3/4 angle, no isometric angle. 192x192 pixels, transparent background, Sea of Stars / Persona 5 aesthetic. Matches the approved reference style of public/assets/dojo/checkpoints/STYLE_ANCHOR_PIXEL.png.
+
+Generator fallback for transparency: if transparent background is not supported, place only the outside/background matte on pure bright magenta (#ff00ff) or a standard transparency checkerboard so it can be removed cleanly after generation. Do not use magenta inside the hut, grass, props, or lights.
+```
+
+#### public/assets/dojo/huts/miji_forge.png
+
+```text
+Modern detailed pixel art top-down view, strict overhead camera like a floor-plan map tile. Miji forge hut, small Japanese forge with electric blue dark-tile roof, squat chimney cap seen from above with a tiny smoke puff, anvil and orange spark pixels visible near south doorway footprint, reinforced wooden frame, compact grass clearing and soft drop shadow beneath. Only roof footprint, porch footprint, and top-down props are visible. No front-facing wall, no door facade, no 3/4 angle, no isometric angle. 192x192 pixels, transparent background, Sea of Stars / Persona 5 aesthetic. Matches the approved reference style of public/assets/dojo/checkpoints/STYLE_ANCHOR_PIXEL.png.
+
+Generator fallback for transparency: if transparent background is not supported, place only the outside/background matte on pure bright magenta (#ff00ff) or a standard transparency checkerboard so it can be removed cleanly after generation. Do not use magenta inside the hut, grass, props, or lights.
+```
+
+#### public/assets/dojo/huts/maji_dojo.png
+
+```text
+Modern detailed pixel art top-down view, strict overhead camera like a floor-plan map tile. Maji dojo hut, small training dojo with crimson red roof tiles, rectangular roof footprint, weapon rack silhouette and two practice posts beside south porch, sturdy wooden frame, compact grass clearing and soft drop shadow beneath. Only roof footprint, porch footprint, and top-down props are visible. No front-facing wall, no door facade, no 3/4 angle, no isometric angle. 192x192 pixels, transparent background, Sea of Stars / Persona 5 aesthetic. Matches the approved reference style of public/assets/dojo/checkpoints/STYLE_ANCHOR_PIXEL.png.
+
+Generator fallback for transparency: if transparent background is not supported, place only the outside/background matte on pure bright magenta (#ff00ff) or a standard transparency checkerboard so it can be removed cleanly after generation. Do not use magenta inside the hut, grass, props, or lights.
+```
+
+#### public/assets/dojo/huts/meji_tea_house.png
+
+```text
+Modern detailed pixel art top-down view, strict overhead camera like a floor-plan map tile. Meji tea house, small Japanese tea hut with mint green roof tiles, roof vent with a small steam curl seen from above, low tea table footprint beside south porch, hanging herb bundles as tiny green details, compact grass clearing and soft drop shadow beneath. Only roof footprint, porch footprint, and top-down props are visible. No front-facing wall, no door facade, no 3/4 angle, no isometric angle. 192x192 pixels, transparent background, Sea of Stars / Persona 5 aesthetic. Matches the approved reference style of public/assets/dojo/checkpoints/STYLE_ANCHOR_PIXEL.png.
+
+Generator fallback for transparency: if transparent background is not supported, place only the outside/background matte on pure bright magenta (#ff00ff) or a standard transparency checkerboard so it can be removed cleanly after generation. Do not use magenta inside the hut, grass, props, or lights.
+```
+
+#### public/assets/dojo/huts/muji_launch_pad.png
+
+```text
+Modern detailed pixel art top-down view, strict overhead camera like a floor-plan map tile. Muji launch pad workshop hut, small workshop with gold yellow roof tiles, rocket scaffolding visible behind the north roof edge from above, blueprints and gear pixels near south porch, compact grass clearing and soft drop shadow beneath. Only roof footprint, porch footprint, and top-down props are visible. No front-facing wall, no door facade, no 3/4 angle, no isometric angle. 192x192 pixels, transparent background, Sea of Stars / Persona 5 aesthetic. Matches the approved reference style of public/assets/dojo/checkpoints/STYLE_ANCHOR_PIXEL.png.
+
+Generator fallback for transparency: if transparent background is not supported, place only the outside/background matte on pure bright magenta (#ff00ff) or a standard transparency checkerboard so it can be removed cleanly after generation. Do not use magenta inside the hut, grass, props, or lights.
+```
+
+#### public/assets/dojo/huts/meowts_shrine.png
+
+```text
+Modern detailed pixel art top-down view, strict overhead camera like a floor-plan map tile. Meowts shrine hut, small shrine with white roof and pink trim, tiny torii gate footprint at south entrance, two cat statue guards as pale pixel silhouettes, altar roof detail, compact grass clearing and soft drop shadow beneath. Only roof footprint, porch footprint, and top-down props are visible. No front-facing wall, no door facade, no 3/4 angle, no isometric angle. 192x192 pixels, transparent background, Sea of Stars / Persona 5 aesthetic. Matches the approved reference style of public/assets/dojo/checkpoints/STYLE_ANCHOR_PIXEL.png.
+
+Generator fallback for transparency: if transparent background is not supported, place only the outside/background matte on pure bright magenta (#ff00ff) or a standard transparency checkerboard so it can be removed cleanly after generation. Do not use magenta inside the hut, grass, props, or lights.
+```
+
