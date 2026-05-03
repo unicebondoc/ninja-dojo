@@ -101,6 +101,10 @@ export class VillageScene extends Phaser.Scene {
   }
 
   createHud() {
+    const params = new URLSearchParams(window.location.search);
+    const debugMode = params.get("debug") === "true";
+    if (!debugMode) return;
+
     this.add.rectangle(640, 28, 1180, 44, 0x25362f, 0.86).setStrokeStyle(1, 0xf5e6be, 0.36).setDepth(7000);
     this.statusText = this.add.text(72, 17, this.statusLabel(), {
       color: "#fff6dc",
