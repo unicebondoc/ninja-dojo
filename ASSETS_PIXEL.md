@@ -290,3 +290,24 @@ Identical character, identical hair, identical outfit across ALL 32 frames. Smoo
 
 Generator fallback for transparency: if transparent background is not supported, place only the outside/background matte on pure bright magenta (#ff00ff) or a standard transparency checkerboard so it can be removed cleanly after generation. Do not use magenta in the sprite itself.
 ```
+
+### Phase 2.2-2 - Tyche Sprite Atlas
+
+#### public/assets/dojo/characters/tyche_atlas.png
+
+```text
+Modern detailed pixel art top-down cat sprite sheet. Pure white Turkish Angora cat viewed from directly above, fluffy tail visible, green eyes as tiny readable pixels, soft compact drop shadow. Sea of Stars / Persona 5 aesthetic, matches public/assets/dojo/checkpoints/STYLE_ANCHOR_PIXEL.png reference.
+
+8 columns x 2 rows, each cell exactly 32x32 pixels. Total 256x64. Transparent background. No frame borders, no numbers, no text.
+
+Layout:
+- Row 1, columns 1-4: Idle sitting, tail flick, 4 frames
+- Row 1, columns 5-8: Walking north, 4 frames
+- Row 2, columns 1-4: Walking south, 4 frames
+- Row 2, columns 5-6: Walking east, 2 frames
+- Row 2, columns 7-8: Walking west, 2 frames
+
+Identical cat, identical scale, identical palette across all frames. Strict overhead camera, no isometric angle, no 3/4 view.
+
+Generator fallback for transparency: if transparent background is not supported, place only the outside/background matte on pure bright magenta (#ff00ff) or a standard transparency checkerboard so it can be removed cleanly after generation.
+```
