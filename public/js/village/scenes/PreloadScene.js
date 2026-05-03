@@ -39,6 +39,13 @@ export class PreloadScene extends Phaser.Scene {
         });
       }
     }
+    for (const [action, frames] of Object.entries(TYCHE_ACTIONS)) {
+      this.load.spritesheet(`tyche_${action}`, `/assets/village/animations/tyche/${action}.png`, {
+        frameWidth: 256,
+        frameHeight: 256,
+        endFrame: frames - 1
+      });
+    }
   }
 
   create() {
@@ -61,4 +68,14 @@ const KUNOICHI_ACTIONS = {
   react: 3,
   sleep: 2,
   yawn: 3
+};
+
+const TYCHE_ACTIONS = {
+  idle: 3,
+  walk_north: 4,
+  walk_south: 4,
+  walk_east: 4,
+  walk_west: 4,
+  groom: 3,
+  pounce: 4
 };

@@ -1,0 +1,44 @@
+{
+  "frames": {
+    "tyche_walk_west_0": {
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      }
+    },
+    "tyche_walk_west_1": {
+      "frame": {
+        "x": 256,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      }
+    },
+    "tyche_walk_west_2": {
+      "frame": {
+        "x": 512,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      }
+    },
+    "tyche_walk_west_3": {
+      "frame": {
+        "x": 768,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      }
+    }
+  },
+  "meta": {
+    "image": "walk_west.png",
+    "size": {
+      "w": 1024,
+      "h": 256
+    },
+    "scale": 1
+  }
+}

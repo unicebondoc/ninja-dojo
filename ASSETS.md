@@ -861,3 +861,77 @@ Single horizontal sprite strip with exactly 3 frames showing stretching and yawn
 
 Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
 ```
+
+## PR 1.5 Phase 4 Prompts
+
+Generated with OpenClaw `openai/gpt-image-2`, then chroma-keyed and normalized into 256px Phaser strips.
+
+### `public/assets/village/animations/tyche/idle.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute pure white Turkish Angora cat, fluffy tail, green eyes, no markings, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective.
+
+Single horizontal sprite strip with exactly 3 frames showing Tyche sitting calmly with a small tail flick. Frames arranged left to right. Each frame is a 256x256 cell, same cat, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 768x256. Keep the full cat small enough to fit comfortably inside each 256x256 frame with padding above ears and below paws.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the cat. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/tyche/walk_north.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute pure white Turkish Angora cat, fluffy tail, green eyes, no markings, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective.
+
+Single horizontal sprite strip with exactly 4 frames showing Tyche walking north, facing away and slightly upward, soft cat walk cycle. Frames arranged left to right. Each frame is a 256x256 cell, same cat, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 1024x256. Keep the full cat small enough to fit comfortably inside each 256x256 frame with padding above ears and below paws.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the cat. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/tyche/walk_south.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute pure white Turkish Angora cat, fluffy tail, green eyes, no markings, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective.
+
+Single horizontal sprite strip with exactly 4 frames showing Tyche walking south, facing camera and slightly downward, soft cat walk cycle. Frames arranged left to right. Each frame is a 256x256 cell, same cat, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 1024x256. Keep the full cat small enough to fit comfortably inside each 256x256 frame with padding above ears and below paws.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the cat. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/tyche/walk_east.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute pure white Turkish Angora cat, fluffy tail, green eyes, no markings, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective.
+
+Single horizontal sprite strip with exactly 4 frames showing Tyche walking east, facing right, soft cat walk cycle. Frames arranged left to right. Each frame is a 256x256 cell, same cat, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 1024x256. Keep the full cat small enough to fit comfortably inside each 256x256 frame with padding above ears and below paws.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the cat. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/tyche/walk_west.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute pure white Turkish Angora cat, fluffy tail, green eyes, no markings, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective.
+
+Single horizontal sprite strip with exactly 4 frames showing Tyche walking west, facing left, soft cat walk cycle. Frames arranged left to right. Each frame is a 256x256 cell, same cat, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 1024x256. Keep the full cat small enough to fit comfortably inside each 256x256 frame with padding above ears and below paws.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the cat. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/tyche/groom.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute pure white Turkish Angora cat, fluffy tail, green eyes, no markings, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective.
+
+Single horizontal sprite strip with exactly 3 frames showing Tyche sitting and licking one raised paw. Frames arranged left to right. Each frame is a 256x256 cell, same cat, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 768x256. Keep the full cat small enough to fit comfortably inside each 256x256 frame with padding above ears and below paws.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the cat. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/tyche/pounce.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute pure white Turkish Angora cat, fluffy tail, green eyes, no markings, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective.
+
+Single horizontal sprite strip with exactly 4 frames showing Tyche crouching low, springing forward, and landing playfully. Frames arranged left to right. Each frame is a 256x256 cell, same cat, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 1024x256. Keep the full cat small enough to fit comfortably inside each 256x256 frame with padding above ears and below paws.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the cat. No frame borders, no numbers, no labels, no text, no watermark.
+```
