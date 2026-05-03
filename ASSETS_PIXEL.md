@@ -311,3 +311,5 @@ Identical cat, identical scale, identical palette across all frames. Strict over
 
 Generator fallback for transparency: if transparent background is not supported, place only the outside/background matte on pure bright magenta (#ff00ff) or a standard transparency checkerboard so it can be removed cleanly after generation.
 ```
+
+## PR 2.3 - Cutaway Interiors
