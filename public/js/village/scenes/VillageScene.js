@@ -170,8 +170,8 @@ export class VillageScene extends Phaser.Scene {
         .setScale(building.scale)
         .setOrigin(0.5, 0.82)
         .setDepth(point.y + 35);
-      const zone = this.add.zone(point.x, point.y + 10, building.frame.w * building.scale, building.frame.h * building.scale)
-        .setOrigin(0.5, 0.82)
+      const zone = this.add.zone(point.x, point.y + 18, 150, 122)
+        .setOrigin(0.5, 0.62)
         .setDepth(point.y + 70)
         .setInteractive({ useHandCursor: true });
       const record = { id: building.id, building, point, interior, glow, image, zone };
