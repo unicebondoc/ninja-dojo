@@ -58,6 +58,7 @@ export class VillageScene extends Phaser.Scene {
     this.add.image(118, 92, "moon_eternal").setDisplaySize(110, 110).setDepth(-90).setAlpha(0.92);
     this.add.image(1166, 98, "moon_earned").setDisplaySize(96, 96).setDepth(-90).setAlpha(0.9);
 
+    this.createMeadowGrounding();
     this.add.image(640, 360, "ground_map").setScale(1.14).setDepth(-80);
 
     for (let i = 0; i < 18; i += 1) this.drawTree(i);
@@ -70,10 +71,21 @@ export class VillageScene extends Phaser.Scene {
     this.parallaxLayers = [
       { image: this.add.tileSprite(640, 360, 1280, 720, "bg_sky").setDepth(-130), factor: 0 },
       { image: this.add.tileSprite(640, 250, 1280, 400, "bg_mountains").setDepth(-120).setAlpha(0.78), factor: 0.1 },
-      { image: this.add.tileSprite(640, 330, 1280, 310, "bg_forest").setDepth(-110).setAlpha(0.72), factor: 0.3 },
-      { image: this.add.tileSprite(640, 645, 1280, 150, "bg_foreground").setDepth(5200).setAlpha(0.86), factor: 0.6 }
+      { image: this.add.tileSprite(640, 330, 1280, 310, "bg_forest").setDepth(-110).setAlpha(0.72), factor: 0.3 }
     ];
     for (const layer of this.parallaxLayers) layer.image.setScrollFactor(0);
+  }
+
+  createMeadowGrounding() {
+    this.groundplane = this.add.image(640, 392, "bg_groundplane")
+      .setDisplaySize(1420, 875)
+      .setDepth(-100)
+      .setAlpha(0.92);
+    this.foregroundMeadow = this.add.image(640, 720, "bg_foreground")
+      .setOrigin(0.5, 1)
+      .setDisplaySize(1280, 400)
+      .setDepth(-95)
+      .setAlpha(0.98);
   }
 
   updateParallaxLayers() {
