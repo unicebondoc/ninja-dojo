@@ -14,8 +14,8 @@ const config = {
     min: { width: 1280, height: 720 }
   },
   render: {
-    antialias: true,
-    pixelArt: false
+    antialias: false,
+    pixelArt: true
   },
   scene: [BootScene, PreloadScene, VillageScene]
 };
