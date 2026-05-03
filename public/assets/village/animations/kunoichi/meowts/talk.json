@@ -1,0 +1,36 @@
+{
+  "frames": {
+    "meowts_talk_0": {
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      }
+    },
+    "meowts_talk_1": {
+      "frame": {
+        "x": 256,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      }
+    },
+    "meowts_talk_2": {
+      "frame": {
+        "x": 512,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      }
+    }
+  },
+  "meta": {
+    "image": "talk.png",
+    "size": {
+      "w": 768,
+      "h": 256
+    },
+    "scale": 1
+  }
+}

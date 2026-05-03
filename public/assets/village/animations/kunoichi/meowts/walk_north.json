@@ -1,0 +1,60 @@
+{
+  "frames": {
+    "meowts_walk_north_0": {
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      }
+    },
+    "meowts_walk_north_1": {
+      "frame": {
+        "x": 256,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      }
+    },
+    "meowts_walk_north_2": {
+      "frame": {
+        "x": 512,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      }
+    },
+    "meowts_walk_north_3": {
+      "frame": {
+        "x": 768,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      }
+    },
+    "meowts_walk_north_4": {
+      "frame": {
+        "x": 1024,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      }
+    },
+    "meowts_walk_north_5": {
+      "frame": {
+        "x": 1280,
+        "y": 0,
+        "w": 256,
+        "h": 256
+      }
+    }
+  },
+  "meta": {
+    "image": "walk_north.png",
+    "size": {
+      "w": 1536,
+      "h": 256
+    },
+    "scale": 1
+  }
+}

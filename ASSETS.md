@@ -137,3 +137,727 @@ python3 /home/uniceadmin/.codex/skills/.system/imagegen/scripts/remove_chroma_ke
 python3 /home/uniceadmin/.codex/skills/.system/imagegen/scripts/remove_chroma_key.py --input public/assets/village/raw/buildings-keyed.png --out public/assets/village/buildings/buildings.png --auto-key border --soft-matte --transparent-threshold 12 --opaque-threshold 220 --despill
 python3 /home/uniceadmin/.codex/skills/.system/imagegen/scripts/remove_chroma_key.py --input public/assets/village/raw/props-keyed.png --out public/assets/village/effects/effects.png --auto-key border --soft-matte --transparent-threshold 12 --opaque-threshold 220 --despill
 ```
+
+## PR 1.5 Phase 3 Prompts
+
+Generated with OpenClaw `openai/gpt-image-2`, then chroma-keyed and normalized into 256px Phaser strips.
+
+### `public/assets/village/animations/kunoichi/moji/idle.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Moji, lavender hair in a ponytail, wearing lavender sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, lavender scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 4 frames showing gentle idle breathing bob in place. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 1024x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/moji/walk_north.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Moji, lavender hair in a ponytail, wearing lavender sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, lavender scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 6 frames showing walking north, facing away and slightly upward, small smooth walk cycle. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 1536x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/moji/walk_south.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Moji, lavender hair in a ponytail, wearing lavender sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, lavender scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 6 frames showing walking south, facing camera and slightly downward, small smooth walk cycle. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 1536x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/moji/walk_east.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Moji, lavender hair in a ponytail, wearing lavender sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, lavender scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 6 frames showing walking east, facing right, small smooth walk cycle. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 1536x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/moji/walk_west.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Moji, lavender hair in a ponytail, wearing lavender sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, lavender scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 6 frames showing walking west, facing left, small smooth walk cycle. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 1536x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/moji/work.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Moji, lavender hair in a ponytail, wearing lavender sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, lavender scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 4 frames showing writing on a scroll with a small brush. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 1024x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/moji/wave.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Moji, lavender hair in a ponytail, wearing lavender sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, lavender scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 4 frames showing friendly greeting wave. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 1024x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/moji/sit.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Moji, lavender hair in a ponytail, wearing lavender sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, lavender scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 2 frames showing sitting cross-legged calmly. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 512x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/moji/talk.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Moji, lavender hair in a ponytail, wearing lavender sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, lavender scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 3 frames showing small mouth and hand motion while talking. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 768x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/moji/react.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Moji, lavender hair in a ponytail, wearing lavender sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, lavender scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 3 frames showing surprised concerned reaction. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 768x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/moji/sleep.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Moji, lavender hair in a ponytail, wearing lavender sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, lavender scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 2 frames showing curled sleepy resting pose. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 512x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/moji/yawn.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Moji, lavender hair in a ponytail, wearing lavender sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, lavender scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 3 frames showing stretching and yawning. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 768x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/miji/idle.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Miji, electric blue hair in a ponytail, wearing blue sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, blue scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 4 frames showing gentle idle breathing bob in place. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 1024x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/miji/walk_north.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Miji, electric blue hair in a ponytail, wearing blue sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, blue scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 6 frames showing walking north, facing away and slightly upward, small smooth walk cycle. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 1536x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/miji/walk_south.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Miji, electric blue hair in a ponytail, wearing blue sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, blue scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 6 frames showing walking south, facing camera and slightly downward, small smooth walk cycle. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 1536x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/miji/walk_east.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Miji, electric blue hair in a ponytail, wearing blue sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, blue scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 6 frames showing walking east, facing right, small smooth walk cycle. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 1536x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/miji/walk_west.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Miji, electric blue hair in a ponytail, wearing blue sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, blue scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 6 frames showing walking west, facing left, small smooth walk cycle. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 1536x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/miji/work.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Miji, electric blue hair in a ponytail, wearing blue sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, blue scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 4 frames showing hammering a tiny anvil with small sparks. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 1024x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/miji/wave.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Miji, electric blue hair in a ponytail, wearing blue sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, blue scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 4 frames showing friendly greeting wave. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 1024x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/miji/sit.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Miji, electric blue hair in a ponytail, wearing blue sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, blue scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 2 frames showing sitting cross-legged calmly. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 512x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/miji/talk.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Miji, electric blue hair in a ponytail, wearing blue sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, blue scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 3 frames showing small mouth and hand motion while talking. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 768x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/miji/react.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Miji, electric blue hair in a ponytail, wearing blue sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, blue scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 3 frames showing surprised concerned reaction. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 768x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/miji/sleep.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Miji, electric blue hair in a ponytail, wearing blue sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, blue scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 2 frames showing curled sleepy resting pose. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 512x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/miji/yawn.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Miji, electric blue hair in a ponytail, wearing blue sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, blue scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 3 frames showing stretching and yawning. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 768x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/maji/idle.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Maji, crimson red hair in a ponytail, wearing red sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, red scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 4 frames showing gentle idle breathing bob in place. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 1024x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/maji/walk_north.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Maji, crimson red hair in a ponytail, wearing red sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, red scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 6 frames showing walking north, facing away and slightly upward, small smooth walk cycle. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 1536x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/maji/walk_south.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Maji, crimson red hair in a ponytail, wearing red sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, red scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 6 frames showing walking south, facing camera and slightly downward, small smooth walk cycle. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 1536x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/maji/walk_east.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Maji, crimson red hair in a ponytail, wearing red sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, red scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 6 frames showing walking east, facing right, small smooth walk cycle. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 1536x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/maji/walk_west.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Maji, crimson red hair in a ponytail, wearing red sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, red scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 6 frames showing walking west, facing left, small smooth walk cycle. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 1536x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/maji/work.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Maji, crimson red hair in a ponytail, wearing red sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, red scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 4 frames showing practicing a controlled sword strike pose. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 1024x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/maji/wave.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Maji, crimson red hair in a ponytail, wearing red sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, red scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 4 frames showing friendly greeting wave. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 1024x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/maji/sit.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Maji, crimson red hair in a ponytail, wearing red sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, red scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 2 frames showing sitting cross-legged calmly. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 512x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/maji/talk.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Maji, crimson red hair in a ponytail, wearing red sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, red scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 3 frames showing small mouth and hand motion while talking. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 768x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/maji/react.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Maji, crimson red hair in a ponytail, wearing red sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, red scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 3 frames showing surprised concerned reaction. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 768x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/maji/sleep.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Maji, crimson red hair in a ponytail, wearing red sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, red scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 2 frames showing curled sleepy resting pose. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 512x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/maji/yawn.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Maji, crimson red hair in a ponytail, wearing red sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, red scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 3 frames showing stretching and yawning. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 768x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/meji/idle.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Meji, mint green hair in a ponytail, wearing mint green sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, mint scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 4 frames showing gentle idle breathing bob in place. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 1024x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/meji/walk_north.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Meji, mint green hair in a ponytail, wearing mint green sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, mint scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 6 frames showing walking north, facing away and slightly upward, small smooth walk cycle. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 1536x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/meji/walk_south.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Meji, mint green hair in a ponytail, wearing mint green sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, mint scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 6 frames showing walking south, facing camera and slightly downward, small smooth walk cycle. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 1536x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/meji/walk_east.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Meji, mint green hair in a ponytail, wearing mint green sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, mint scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 6 frames showing walking east, facing right, small smooth walk cycle. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 1536x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/meji/walk_west.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Meji, mint green hair in a ponytail, wearing mint green sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, mint scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 6 frames showing walking west, facing left, small smooth walk cycle. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 1536x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/meji/work.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Meji, mint green hair in a ponytail, wearing mint green sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, mint scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 4 frames showing stirring a tea bowl with calm focus. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 1024x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/meji/wave.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Meji, mint green hair in a ponytail, wearing mint green sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, mint scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 4 frames showing friendly greeting wave. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 1024x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/meji/sit.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Meji, mint green hair in a ponytail, wearing mint green sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, mint scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 2 frames showing sitting cross-legged calmly. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 512x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/meji/talk.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Meji, mint green hair in a ponytail, wearing mint green sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, mint scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 3 frames showing small mouth and hand motion while talking. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 768x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/meji/react.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Meji, mint green hair in a ponytail, wearing mint green sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, mint scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 3 frames showing surprised concerned reaction. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 768x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/meji/sleep.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Meji, mint green hair in a ponytail, wearing mint green sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, mint scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 2 frames showing curled sleepy resting pose. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 512x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/meji/yawn.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Meji, mint green hair in a ponytail, wearing mint green sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, mint scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 3 frames showing stretching and yawning. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 768x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/muji/idle.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Muji, gold yellow hair in a ponytail, wearing gold sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, gold scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 4 frames showing gentle idle breathing bob in place. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 1024x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/muji/walk_north.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Muji, gold yellow hair in a ponytail, wearing gold sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, gold scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 6 frames showing walking north, facing away and slightly upward, small smooth walk cycle. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 1536x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/muji/walk_south.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Muji, gold yellow hair in a ponytail, wearing gold sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, gold scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 6 frames showing walking south, facing camera and slightly downward, small smooth walk cycle. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 1536x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/muji/walk_east.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Muji, gold yellow hair in a ponytail, wearing gold sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, gold scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 6 frames showing walking east, facing right, small smooth walk cycle. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 1536x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/muji/walk_west.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Muji, gold yellow hair in a ponytail, wearing gold sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, gold scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 6 frames showing walking west, facing left, small smooth walk cycle. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 1536x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/muji/work.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Muji, gold yellow hair in a ponytail, wearing gold sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, gold scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 4 frames showing tinkering with small rocket parts and gears. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 1024x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/muji/wave.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Muji, gold yellow hair in a ponytail, wearing gold sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, gold scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 4 frames showing friendly greeting wave. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 1024x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/muji/sit.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Muji, gold yellow hair in a ponytail, wearing gold sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, gold scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 2 frames showing sitting cross-legged calmly. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 512x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/muji/talk.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Muji, gold yellow hair in a ponytail, wearing gold sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, gold scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 3 frames showing small mouth and hand motion while talking. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 768x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/muji/react.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Muji, gold yellow hair in a ponytail, wearing gold sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, gold scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 3 frames showing surprised concerned reaction. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 768x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/muji/sleep.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Muji, gold yellow hair in a ponytail, wearing gold sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, gold scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 2 frames showing curled sleepy resting pose. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 512x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/muji/yawn.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Muji, gold yellow hair in a ponytail, wearing gold sleeveless cropped gi, dark fitted leggings, wrist wraps, soft cloth boots, gold scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 3 frames showing stretching and yawning. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 768x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/meowts/idle.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Meowts, snow white hair with one pink streak in a ponytail, wearing white sleeveless cropped gi with pink accents, dark fitted leggings, wrist wraps, soft cloth boots, pink scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 4 frames showing gentle idle breathing bob in place. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 1024x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/meowts/walk_north.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Meowts, snow white hair with one pink streak in a ponytail, wearing white sleeveless cropped gi with pink accents, dark fitted leggings, wrist wraps, soft cloth boots, pink scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 6 frames showing walking north, facing away and slightly upward, small smooth walk cycle. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 1536x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/meowts/walk_south.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Meowts, snow white hair with one pink streak in a ponytail, wearing white sleeveless cropped gi with pink accents, dark fitted leggings, wrist wraps, soft cloth boots, pink scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 6 frames showing walking south, facing camera and slightly downward, small smooth walk cycle. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 1536x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/meowts/walk_east.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Meowts, snow white hair with one pink streak in a ponytail, wearing white sleeveless cropped gi with pink accents, dark fitted leggings, wrist wraps, soft cloth boots, pink scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 6 frames showing walking east, facing right, small smooth walk cycle. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 1536x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/meowts/walk_west.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Meowts, snow white hair with one pink streak in a ponytail, wearing white sleeveless cropped gi with pink accents, dark fitted leggings, wrist wraps, soft cloth boots, pink scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 6 frames showing walking west, facing left, small smooth walk cycle. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 1536x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/meowts/work.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Meowts, snow white hair with one pink streak in a ponytail, wearing white sleeveless cropped gi with pink accents, dark fitted leggings, wrist wraps, soft cloth boots, pink scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 4 frames showing raising a paw-like blessing gesture with a soft glowing aura. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 1024x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/meowts/wave.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Meowts, snow white hair with one pink streak in a ponytail, wearing white sleeveless cropped gi with pink accents, dark fitted leggings, wrist wraps, soft cloth boots, pink scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 4 frames showing friendly greeting wave. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 1024x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/meowts/sit.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Meowts, snow white hair with one pink streak in a ponytail, wearing white sleeveless cropped gi with pink accents, dark fitted leggings, wrist wraps, soft cloth boots, pink scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 2 frames showing sitting cross-legged calmly. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 512x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/meowts/talk.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Meowts, snow white hair with one pink streak in a ponytail, wearing white sleeveless cropped gi with pink accents, dark fitted leggings, wrist wraps, soft cloth boots, pink scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 3 frames showing small mouth and hand motion while talking. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 768x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/meowts/react.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Meowts, snow white hair with one pink streak in a ponytail, wearing white sleeveless cropped gi with pink accents, dark fitted leggings, wrist wraps, soft cloth boots, pink scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 3 frames showing surprised concerned reaction. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 768x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/meowts/sleep.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Meowts, snow white hair with one pink streak in a ponytail, wearing white sleeveless cropped gi with pink accents, dark fitted leggings, wrist wraps, soft cloth boots, pink scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 2 frames showing curled sleepy resting pose. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 512x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```
+
+### `public/assets/village/animations/kunoichi/meowts/yawn.png`
+
+```text
+Production-ready 2D game sprite strip matching the existing Ninja Dojo village sprite atlas style: tiny cute chibi kunoichi, full body visible, head about one third of body, soft watercolor painterly shading, clean readable game sprite silhouette, 3/4 top-down isometric game perspective. Character: Meowts, snow white hair with one pink streak in a ponytail, wearing white sleeveless cropped gi with pink accents, dark fitted leggings, wrist wraps, soft cloth boots, pink scarf detail, friendly face visible, no face mask.
+
+Single horizontal sprite strip with exactly 3 frames showing stretching and yawning. Frames arranged left to right. Each frame is a 256x256 cell, same character, same hair, same outfit, same scale, same feet-on-ground baseline, identical lighting. Total intended asset 768x256. Keep each full body small enough to fit comfortably inside each 256x256 frame with padding above hair and below feet.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the character. No frame borders, no numbers, no labels, no text, no watermark.
+```

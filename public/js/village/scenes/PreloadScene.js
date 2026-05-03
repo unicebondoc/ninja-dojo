@@ -30,9 +30,35 @@ export class PreloadScene extends Phaser.Scene {
     for (const key of ["stone_lantern", "flower_bed", "signpost", "lily_pond", "wildflowers"]) {
       this.load.image(key, `/assets/village/props/${key}.png`);
     }
+    for (const id of KUNOICHI_IDS) {
+      for (const [action, frames] of Object.entries(KUNOICHI_ACTIONS)) {
+        this.load.spritesheet(`kunoichi_${id}_${action}`, `/assets/village/animations/kunoichi/${id}/${action}.png`, {
+          frameWidth: 256,
+          frameHeight: 256,
+          endFrame: frames - 1
+        });
+      }
+    }
   }
 
   create() {
     this.scene.start("VillageScene");
   }
 }
+
+const KUNOICHI_IDS = ["moji", "miji", "maji", "meji", "muji", "meowts"];
+
+const KUNOICHI_ACTIONS = {
+  idle: 4,
+  walk_north: 6,
+  walk_south: 6,
+  walk_east: 6,
+  walk_west: 6,
+  work: 4,
+  wave: 4,
+  sit: 2,
+  talk: 3,
+  react: 3,
+  sleep: 2,
+  yawn: 3
+};
