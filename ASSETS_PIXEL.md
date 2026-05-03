@@ -152,3 +152,141 @@ No isometric angle, no 3/4 angle, no characters, no buildings.
 Generated deterministically with PIL pixel drawing to match the approved palette; no API or metered model call used.
 
 ## PR 2.2 - Characters & Live Telemetry
+
+### Phase 2.2-1 - Kunoichi Sprite Atlases
+
+#### public/assets/dojo/characters/moji_atlas.png
+
+```text
+Modern detailed pixel art top-down character sprite sheet. Female ninja girl viewed from directly above like a tactical map token, NOT from the front and NOT isometric. lavender purple short ponytail hair, dark sleeveless gi with lavender trim, soft compact drop shadow beneath, Sea of Stars / Persona 5 aesthetic, matches public/assets/dojo/checkpoints/STYLE_ANCHOR_PIXEL.png reference.
+
+8 columns x 4 rows sprite sheet, each cell exactly 32x32 pixels. Total image 256x128 pixels. Transparent background between frames. No frame borders, no numbers, no text.
+
+Frame layout:
+- Row 1, columns 1-4: Idle pose, gentle shoulder bob (4 frames)
+- Row 1, columns 5-8: Walking north (away from camera), 4-frame cycle
+- Row 2, columns 1-4: Walking south (toward camera), 4-frame cycle
+- Row 2, columns 5-8: Walking east (right), 4-frame cycle
+- Row 3, columns 1-4: Walking west (left), 4-frame cycle
+- Row 3, columns 5-8: writing on a scroll with a brush, 4 frames
+- Row 4, columns 1-4: Waving greeting, 4 frames
+- Row 4, columns 5-6: Sitting cross-legged, 2 frames
+- Row 4, columns 7-8: Talking gesture, 2 frames
+
+Identical character, identical hair, identical outfit across ALL 32 frames. Smooth animation progression within each row segment. Strict overhead camera: show hair, shoulders, body and feet from above, no front-facing portrait pose.
+
+Generator fallback for transparency: if transparent background is not supported, place only the outside/background matte on pure bright magenta (#ff00ff) or a standard transparency checkerboard so it can be removed cleanly after generation. Do not use magenta in the sprite itself.
+```#### public/assets/dojo/characters/miji_atlas.png
+
+```text
+Modern detailed pixel art top-down character sprite sheet. Female ninja girl viewed from directly above like a tactical map token, NOT from the front and NOT isometric. electric blue side-swept hair hair, dark sleeveless gi with electric blue trim, soft compact drop shadow beneath, Sea of Stars / Persona 5 aesthetic, matches public/assets/dojo/checkpoints/STYLE_ANCHOR_PIXEL.png reference.
+
+8 columns x 4 rows sprite sheet, each cell exactly 32x32 pixels. Total image 256x128 pixels. Transparent background between frames. No frame borders, no numbers, no text.
+
+Frame layout:
+- Row 1, columns 1-4: Idle pose, gentle shoulder bob (4 frames)
+- Row 1, columns 5-8: Walking north (away from camera), 4-frame cycle
+- Row 2, columns 1-4: Walking south (toward camera), 4-frame cycle
+- Row 2, columns 5-8: Walking east (right), 4-frame cycle
+- Row 3, columns 1-4: Walking west (left), 4-frame cycle
+- Row 3, columns 5-8: hammering a tiny anvil with sparks, 4 frames
+- Row 4, columns 1-4: Waving greeting, 4 frames
+- Row 4, columns 5-6: Sitting cross-legged, 2 frames
+- Row 4, columns 7-8: Talking gesture, 2 frames
+
+Identical character, identical hair, identical outfit across ALL 32 frames. Smooth animation progression within each row segment. Strict overhead camera: show hair, shoulders, body and feet from above, no front-facing portrait pose.
+
+Generator fallback for transparency: if transparent background is not supported, place only the outside/background matte on pure bright magenta (#ff00ff) or a standard transparency checkerboard so it can be removed cleanly after generation. Do not use magenta in the sprite itself.
+```
+
+#### public/assets/dojo/characters/maji_atlas.png
+
+```text
+Modern detailed pixel art top-down character sprite sheet. Female ninja girl viewed from directly above like a tactical map token, NOT from the front and NOT isometric. crimson red twin tails hair, dark sleeveless gi with crimson trim, soft compact drop shadow beneath, Sea of Stars / Persona 5 aesthetic, matches public/assets/dojo/checkpoints/STYLE_ANCHOR_PIXEL.png reference.
+
+8 columns x 4 rows sprite sheet, each cell exactly 32x32 pixels. Total image 256x128 pixels. Transparent background between frames. No frame borders, no numbers, no text.
+
+Frame layout:
+- Row 1, columns 1-4: Idle pose, gentle shoulder bob (4 frames)
+- Row 1, columns 5-8: Walking north (away from camera), 4-frame cycle
+- Row 2, columns 1-4: Walking south (toward camera), 4-frame cycle
+- Row 2, columns 5-8: Walking east (right), 4-frame cycle
+- Row 3, columns 1-4: Walking west (left), 4-frame cycle
+- Row 3, columns 5-8: cycling through a sword strike pose, 4 frames
+- Row 4, columns 1-4: Waving greeting, 4 frames
+- Row 4, columns 5-6: Sitting cross-legged, 2 frames
+- Row 4, columns 7-8: Talking gesture, 2 frames
+
+Identical character, identical hair, identical outfit across ALL 32 frames. Smooth animation progression within each row segment. Strict overhead camera: show hair, shoulders, body and feet from above, no front-facing portrait pose.
+
+Generator fallback for transparency: if transparent background is not supported, place only the outside/background matte on pure bright magenta (#ff00ff) or a standard transparency checkerboard so it can be removed cleanly after generation. Do not use magenta in the sprite itself.
+```
+
+#### public/assets/dojo/characters/meji_atlas.png
+
+```text
+Modern detailed pixel art top-down character sprite sheet. Female ninja girl viewed from directly above like a tactical map token, NOT from the front and NOT isometric. mint green bob cut hair, dark sleeveless gi with mint trim, soft compact drop shadow beneath, Sea of Stars / Persona 5 aesthetic, matches public/assets/dojo/checkpoints/STYLE_ANCHOR_PIXEL.png reference.
+
+8 columns x 4 rows sprite sheet, each cell exactly 32x32 pixels. Total image 256x128 pixels. Transparent background between frames. No frame borders, no numbers, no text.
+
+Frame layout:
+- Row 1, columns 1-4: Idle pose, gentle shoulder bob (4 frames)
+- Row 1, columns 5-8: Walking north (away from camera), 4-frame cycle
+- Row 2, columns 1-4: Walking south (toward camera), 4-frame cycle
+- Row 2, columns 5-8: Walking east (right), 4-frame cycle
+- Row 3, columns 1-4: Walking west (left), 4-frame cycle
+- Row 3, columns 5-8: stirring a tea bowl, 4 frames
+- Row 4, columns 1-4: Waving greeting, 4 frames
+- Row 4, columns 5-6: Sitting cross-legged, 2 frames
+- Row 4, columns 7-8: Talking gesture, 2 frames
+
+Identical character, identical hair, identical outfit across ALL 32 frames. Smooth animation progression within each row segment. Strict overhead camera: show hair, shoulders, body and feet from above, no front-facing portrait pose.
+
+Generator fallback for transparency: if transparent background is not supported, place only the outside/background matte on pure bright magenta (#ff00ff) or a standard transparency checkerboard so it can be removed cleanly after generation. Do not use magenta in the sprite itself.
+```
+
+#### public/assets/dojo/characters/muji_atlas.png
+
+```text
+Modern detailed pixel art top-down character sprite sheet. Female ninja girl viewed from directly above like a tactical map token, NOT from the front and NOT isometric. gold yellow braid hair, dark sleeveless gi with gold trim, soft compact drop shadow beneath, Sea of Stars / Persona 5 aesthetic, matches public/assets/dojo/checkpoints/STYLE_ANCHOR_PIXEL.png reference.
+
+8 columns x 4 rows sprite sheet, each cell exactly 32x32 pixels. Total image 256x128 pixels. Transparent background between frames. No frame borders, no numbers, no text.
+
+Frame layout:
+- Row 1, columns 1-4: Idle pose, gentle shoulder bob (4 frames)
+- Row 1, columns 5-8: Walking north (away from camera), 4-frame cycle
+- Row 2, columns 1-4: Walking south (toward camera), 4-frame cycle
+- Row 2, columns 5-8: Walking east (right), 4-frame cycle
+- Row 3, columns 1-4: Walking west (left), 4-frame cycle
+- Row 3, columns 5-8: tinkering with tiny rocket parts, 4 frames
+- Row 4, columns 1-4: Waving greeting, 4 frames
+- Row 4, columns 5-6: Sitting cross-legged, 2 frames
+- Row 4, columns 7-8: Talking gesture, 2 frames
+
+Identical character, identical hair, identical outfit across ALL 32 frames. Smooth animation progression within each row segment. Strict overhead camera: show hair, shoulders, body and feet from above, no front-facing portrait pose.
+
+Generator fallback for transparency: if transparent background is not supported, place only the outside/background matte on pure bright magenta (#ff00ff) or a standard transparency checkerboard so it can be removed cleanly after generation. Do not use magenta in the sprite itself.
+```
+
+#### public/assets/dojo/characters/meowts_atlas.png
+
+```text
+Modern detailed pixel art top-down character sprite sheet. Female ninja girl viewed from directly above like a tactical map token, NOT from the front and NOT isometric. snow white hair with a pink streak in twin buns hair, white gi with pink trim, soft compact drop shadow beneath, Sea of Stars / Persona 5 aesthetic, matches public/assets/dojo/checkpoints/STYLE_ANCHOR_PIXEL.png reference.
+
+8 columns x 4 rows sprite sheet, each cell exactly 32x32 pixels. Total image 256x128 pixels. Transparent background between frames. No frame borders, no numbers, no text.
+
+Frame layout:
+- Row 1, columns 1-4: Idle pose, gentle shoulder bob (4 frames)
+- Row 1, columns 5-8: Walking north (away from camera), 4-frame cycle
+- Row 2, columns 1-4: Walking south (toward camera), 4-frame cycle
+- Row 2, columns 5-8: Walking east (right), 4-frame cycle
+- Row 3, columns 1-4: Walking west (left), 4-frame cycle
+- Row 3, columns 5-8: raising paws in a blessing motion, 4 frames
+- Row 4, columns 1-4: Waving greeting, 4 frames
+- Row 4, columns 5-6: Sitting cross-legged, 2 frames
+- Row 4, columns 7-8: Talking gesture, 2 frames
+
+Identical character, identical hair, identical outfit across ALL 32 frames. Smooth animation progression within each row segment. Strict overhead camera: show hair, shoulders, body and feet from above, no front-facing portrait pose.
+
+Generator fallback for transparency: if transparent background is not supported, place only the outside/background matte on pure bright magenta (#ff00ff) or a standard transparency checkerboard so it can be removed cleanly after generation. Do not use magenta in the sprite itself.
+```
