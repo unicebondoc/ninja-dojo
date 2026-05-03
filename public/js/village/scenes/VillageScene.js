@@ -7,6 +7,17 @@ import { DialogueSystem } from "../systems/DialogueSystem.js";
 import { EventBridge } from "../systems/EventBridge.js";
 import { PathfindingGrid } from "../systems/PathfindingGrid.js";
 
+/**
+ * PR 1.6 GROUNDING FIX — DIAGNOSIS
+ * Issue: the village map appears as a floating island because the
+ * isometric ground_map keeps its hard transparent diamond edge visible.
+ * Root cause: bg_foreground is only a shallow 200px bottom strip and is
+ * rendered as a high-depth overlay; there is no soft meadow layer behind
+ * the tilemap to connect the diamond edge into the wider environment.
+ * Fix: add a feathered bg_groundplane behind the tilemap and replace the
+ * foreground strip with a taller painted meadow layer positioned below
+ * the tilemap, preserving all gameplay and debug HUD behavior.
+ */
 export class VillageScene extends Phaser.Scene {
   constructor() {
     super("VillageScene");
