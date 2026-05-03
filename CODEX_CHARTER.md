@@ -109,6 +109,17 @@ the dojo interpretation always wins. When in doubt, ask Unice.
 - DO NOT PUSH without explicit "go push" or "approved to push" from
   Unice in chat. The eye test is the final gate.
 
+## $0 Rule (Detailed)
+
+Asset generation must use OAuth-based subscription access for any model,
+NEVER metered API keys. Specifically:
+- Claude/Anthropic models → Claude Max OAuth via ~/.claude/.credentials.json
+- OpenAI models (gpt-image-2, gpt-image-1, etc.) → GPT Pro / Codex OAuth via
+  OpenClaw multi-model bridge (provider=openai-codex mode=oauth)
+- NEVER OPENAI_API_KEY, ANTHROPIC_API_KEY, or any per-call billing path
+
+Codex must verify and report routing in any PR involving asset generation.
+
 ## PR Sequence
 
 - PR 1.4 — Charter v1 + HUD quarantine (shipped)
