@@ -30,6 +30,7 @@ export class VillageScene extends Phaser.Scene {
     this.createInteriorControls();
     this.bridge = new EventBridge(this);
     this.bridge.connect();
+    this.startKunoichiAmbientLoop();
     this.startTycheLoop();
   }
 
@@ -46,7 +47,7 @@ export class VillageScene extends Phaser.Scene {
     this.add.image(118, 92, "moon_eternal").setDisplaySize(110, 110).setDepth(-90).setAlpha(0.92);
     this.add.image(1166, 98, "moon_earned").setDisplaySize(96, 96).setDepth(-90).setAlpha(0.9);
 
-    this.add.image(640, 360, "ground_map").setDepth(-80);
+    this.add.image(640, 360, "ground_map").setScale(1.14).setDepth(-80);
 
     for (let i = 0; i < 18; i += 1) this.drawTree(i);
     for (const tile of [{ x: 7, y: 5 }, { x: 11, y: 5 }, { x: 7, y: 7 }, { x: 11, y: 7 }]) this.drawLantern(tile);
@@ -410,6 +411,26 @@ export class VillageScene extends Phaser.Scene {
     };
     this.time.addEvent({ delay: 5200, loop: true, callback: () => this.tyche.wander() });
     schedule();
+  }
+
+  startKunoichiAmbientLoop() {
+    const actions = [
+      { name: "wave", duration: 2200 },
+      { name: "yawn", duration: 2400 },
+      { name: "sit", duration: 2600 }
+    ];
+    this.time.addEvent({
+      delay: 6200,
+      loop: true,
+      callback: () => {
+        if (this.activeInterior) return;
+        const idle = [...this.kunoichi.values()].filter((entity) => entity.state === "idle");
+        if (!idle.length) return;
+        const entity = Phaser.Utils.Array.GetRandom(idle);
+        const action = Phaser.Utils.Array.GetRandom(actions);
+        entity.ambient(action.name, action.duration);
+      }
+    });
   }
 
   receiptGlow(target) {

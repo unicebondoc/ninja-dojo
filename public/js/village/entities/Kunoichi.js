@@ -158,6 +158,19 @@ export class Kunoichi {
     });
   }
 
+  ambient(action, durationMs = 2200) {
+    if (this.state !== "idle") return false;
+    this.state = "ambient";
+    this.play(action);
+    this.scene.time.delayedCall(durationMs, () => {
+      if (this.state === "ambient") {
+        this.state = "idle";
+        this.play("idle");
+      }
+    });
+    return true;
+  }
+
   syncFollowers() {
     this.sprite.setDepth(this.sprite.y + 80);
   }
