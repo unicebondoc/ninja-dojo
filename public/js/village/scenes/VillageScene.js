@@ -2,7 +2,7 @@ import { Kunoichi } from "../entities/Kunoichi.js";
 import { Tyche } from "../entities/Tyche.js";
 import { dropScroll } from "../entities/Scroll.js";
 import { KUNOICHI } from "../data/kunoichi-config.js";
-import { BUILDINGS, GRID, PATHS, PLAZA, TILE, isoToScreen } from "../data/village-layout.js";
+import { BUILDINGS, PLAZA, isoToScreen } from "../data/village-layout.js";
 import { DialogueSystem } from "../systems/DialogueSystem.js";
 import { EventBridge } from "../systems/EventBridge.js";
 import { PathfindingGrid } from "../systems/PathfindingGrid.js";
@@ -39,24 +39,14 @@ export class VillageScene extends Phaser.Scene {
 
   drawWorld() {
     this.createParallaxBackground();
-    this.add.circle(118, 92, 36, 0xf7efd5, 0.88).setDepth(-90);
-    this.add.circle(1166, 98, 30, 0xf7d66b, 0.82).setDepth(-90);
+    this.add.image(118, 92, "moon_eternal").setDisplaySize(110, 110).setDepth(-90).setAlpha(0.92);
+    this.add.image(1166, 98, "moon_earned").setDisplaySize(96, 96).setDepth(-90).setAlpha(0.9);
 
-    const ground = this.add.graphics().setDepth(-80);
-    for (let y = 0; y < GRID.height; y += 1) {
-      for (let x = 0; x < GRID.width; x += 1) {
-        const point = isoToScreen({ x, y });
-        const tone = (x + y) % 2 ? 0x9fcf9c : 0xaed8a5;
-        drawDiamond(ground, point.x, point.y, TILE.width, TILE.height, tone, 0x7fb27c, 0.94);
-      }
-    }
+    this.add.image(640, 360, "ground_map").setDepth(-80);
 
-    const paths = this.add.graphics().setDepth(-70);
-    for (const [from, to] of PATHS) drawPath(paths, from, to);
-    drawDiamond(paths, isoToScreen(PLAZA).x, isoToScreen(PLAZA).y, 190, 96, 0xd8c29a, 0xa9895d, 0.98);
-
-    for (let i = 0; i < 22; i += 1) this.drawTree(i);
+    for (let i = 0; i < 18; i += 1) this.drawTree(i);
     for (const tile of [{ x: 7, y: 5 }, { x: 11, y: 5 }, { x: 7, y: 7 }, { x: 11, y: 7 }]) this.drawLantern(tile);
+    this.createMapProps();
     this.createPetalDrift();
   }
 
@@ -95,23 +85,43 @@ export class VillageScene extends Phaser.Scene {
 
   drawTree(index) {
     const edgeTiles = [
-      { x: index % 18, y: 0 },
-      { x: index % 18, y: 12 },
-      { x: 0, y: index % 13 },
-      { x: 17, y: index % 13 }
+      { x: 2 + (index % 7) * 2, y: 0 },
+      { x: 2 + (index % 7) * 2, y: 12 },
+      { x: 0, y: 1 + (index % 5) * 2 },
+      { x: 17, y: 1 + (index % 5) * 2 }
     ];
     const tile = edgeTiles[index % edgeTiles.length];
     const point = isoToScreen(tile);
-    const trunk = this.add.rectangle(point.x, point.y - 18, 8, 36, 0x7d6044).setDepth(point.y - 20);
-    const bloom = this.add.circle(point.x, point.y - 46, 26, 0xf3b6c8, 0.88).setDepth(point.y - 18);
-    this.tweens.add({ targets: [trunk, bloom], x: point.x + Phaser.Math.Between(-3, 3), duration: 2200, yoyo: true, repeat: -1, ease: "Sine.easeInOut" });
+    const tree = this.add.image(point.x, point.y + 10, `cherry_${(index % 4) + 1}`)
+      .setOrigin(0.5, 0.9)
+      .setScale(0.42 + (index % 3) * 0.025)
+      .setDepth(point.y + 12);
+    this.tweens.add({ targets: tree, x: point.x + Phaser.Math.Between(-2, 2), duration: 2600, yoyo: true, repeat: -1, ease: "Sine.easeInOut" });
   }
 
   drawLantern(tile) {
     const point = isoToScreen(tile);
-    this.add.rectangle(point.x, point.y - 18, 8, 36, 0x654a35).setDepth(point.y + 20);
-    const glow = this.add.circle(point.x, point.y - 42, 12, 0xffc66c, 0.5).setDepth(point.y + 21);
+    this.add.image(point.x, point.y + 2, "stone_lantern").setOrigin(0.5, 0.84).setScale(0.24).setDepth(point.y + 20);
+    const glow = this.add.circle(point.x, point.y - 22, 11, 0xffc66c, 0.42).setDepth(point.y + 21);
     this.tweens.add({ targets: glow, alpha: 0.9, scale: 1.18, duration: 1500, yoyo: true, repeat: -1, ease: "Sine.easeInOut" });
+  }
+
+  createMapProps() {
+    const props = [
+      { key: "flower_bed", tile: { x: 4, y: 4 }, scale: 0.24 },
+      { key: "flower_bed", tile: { x: 12, y: 6 }, scale: 0.22 },
+      { key: "wildflowers", tile: { x: 14, y: 10 }, scale: 0.22 },
+      { key: "wildflowers", tile: { x: 3, y: 9 }, scale: 0.2 },
+      { key: "signpost", tile: { x: 8, y: 11 }, scale: 0.24 },
+      { key: "lily_pond", tile: { x: 3, y: 7 }, scale: 0.28 }
+    ];
+    for (const prop of props) {
+      const point = isoToScreen(prop.tile);
+      this.add.image(point.x, point.y + 8, prop.key)
+        .setOrigin(0.5, 0.82)
+        .setScale(prop.scale)
+        .setDepth(point.y + 18);
+    }
   }
 
   createBuildings() {
@@ -289,31 +299,6 @@ export class VillageScene extends Phaser.Scene {
     const pulse = this.add.circle(point.x, point.y, 36, 0xffc66c, 0.36).setDepth(1200);
     this.tweens.add({ targets: pulse, scale: 3, alpha: 0, duration: 2000, ease: "Sine.easeOut", onComplete: () => pulse.destroy() });
   }
-}
-
-function drawDiamond(graphics, x, y, width, height, fill, stroke, alpha = 1) {
-  graphics.fillStyle(fill, alpha);
-  graphics.lineStyle(1, stroke, 0.25);
-  graphics.beginPath();
-  graphics.moveTo(x, y - height / 2);
-  graphics.lineTo(x + width / 2, y);
-  graphics.lineTo(x, y + height / 2);
-  graphics.lineTo(x - width / 2, y);
-  graphics.closePath();
-  graphics.fillPath();
-  graphics.strokePath();
-}
-
-function drawPath(graphics, from, to) {
-  const start = isoToScreen(from);
-  const end = isoToScreen(to);
-  graphics.lineStyle(24, 0xd8c29a, 0.86);
-  graphics.beginPath();
-  graphics.moveTo(start.x, start.y);
-  graphics.lineTo(end.x, end.y);
-  graphics.strokePath();
-  graphics.lineStyle(2, 0xa9895d, 0.28);
-  graphics.strokePath();
 }
 
 function shortText(text) {

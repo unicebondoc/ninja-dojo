@@ -54,6 +54,64 @@ Studio Ghibli hand-painted aesthetic, soft pastel watercolor palette, warm story
 Studio Ghibli hand-painted aesthetic, soft pastel watercolor palette, warm storybook lighting, painterly texture with visible brush strokes. Single cherry blossom petal game sprite, soft pink with a subtle gradient edge, isolated centered subject, generous padding, no shadow, no text, no watermark. Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Do not use #00ff00 anywhere in the petal.
 ```
 
+## PR 1.5 Phase 2 Prompts
+
+Generated assets were normalized into `trees/`, `moons/`, `tiles/`, and `props/`. Chroma-key subjects were converted to alpha with Pillow, then cropped into fixed game-sprite canvases. `tiles/ground_map.png` was composed locally from the generated grass and path textures to remove the checkerboard map.
+
+### `public/assets/village/trees/cherry_1.png`
+
+```text
+Studio Ghibli hand-painted aesthetic, soft pastel watercolor palette, warm storybook lighting, painterly texture with visible brush strokes, soft ambient occlusion. Single 3/4 isometric cherry blossom tree for a cozy kunoichi village game, natural branching trunk, layered soft pink blossoms, organic silhouette, not a lollipop shape. Isolated centered game sprite with generous padding. Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Do not use #00ff00 in the tree. No text, no watermark, no shadow.
+```
+
+### `public/assets/village/trees/cherry_2.png`
+
+```text
+Studio Ghibli hand-painted aesthetic, soft pastel watercolor palette, warm storybook lighting, painterly texture with visible brush strokes, soft ambient occlusion. Single 3/4 isometric cherry blossom tree variant for a cozy kunoichi village game, leaning natural trunk, asymmetric canopy of layered pale pink blossoms, organic silhouette, not a lollipop shape. Isolated centered game sprite with generous padding. Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Do not use #00ff00 in the tree. No text, no watermark, no shadow.
+```
+
+### `public/assets/village/trees/cherry_3.png`
+
+```text
+Studio Ghibli hand-painted aesthetic, soft pastel watercolor palette, warm storybook lighting, painterly texture with visible brush strokes, soft ambient occlusion. Single 3/4 isometric cherry blossom tree variant for a cozy kunoichi village game, shorter broad canopy, split natural trunk, clustered soft rose-pink blossoms, organic silhouette, not a lollipop shape. Isolated centered game sprite with generous padding. Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Do not use #00ff00 in the tree. No text, no watermark, no shadow.
+```
+
+### `public/assets/village/trees/cherry_4.png`
+
+```text
+Studio Ghibli hand-painted aesthetic, soft pastel watercolor palette, warm storybook lighting, painterly texture with visible brush strokes, soft ambient occlusion. Single 3/4 isometric cherry blossom tree variant for a cozy kunoichi village game, graceful arched trunk, scattered airy canopy of pale blush blossoms, visible branches, organic silhouette, not a lollipop shape. Isolated centered game sprite with generous padding. Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Do not use #00ff00 in the tree. No text, no watermark, no shadow.
+```
+
+### `public/assets/village/moons/moon_eternal.png`
+
+```text
+Studio Ghibli hand-painted aesthetic, soft pastel watercolor palette, warm storybook lighting, painterly texture with visible brush strokes. Single game sprite of a pale silver-white moon with soft halo glow, circular but painterly, luminous and gentle, isolated centered subject, generous padding. Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Do not use #00ff00 in the moon. No text, no watermark, no shadow.
+```
+
+### `public/assets/village/moons/moon_earned.png`
+
+```text
+Studio Ghibli hand-painted aesthetic, soft pastel watercolor palette, warm storybook lighting, painterly texture with visible brush strokes. Single game sprite of a warm golden moon with brighter soft halo glow, circular but painterly, luminous and gentle, isolated centered subject, generous padding. Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Do not use #00ff00 in the moon. No text, no watermark, no shadow.
+```
+
+### `public/assets/village/tiles/grass_painterly.png`
+
+```text
+Studio Ghibli hand-painted aesthetic, soft pastel watercolor palette, warm storybook lighting, painterly texture with visible brush strokes, soft ambient occlusion. Seamless painterly grass texture for a cozy 3/4 isometric village game, lush soft green watercolor grass with tiny subtle color variation, no grid, no checkerboard, no objects, no text, no watermark. Square texture tile.
+```
+
+### `public/assets/village/tiles/path_stone.png`
+
+```text
+Studio Ghibli hand-painted aesthetic, soft pastel watercolor palette, warm storybook lighting, painterly texture with visible brush strokes. Organic stone path texture for a cozy 3/4 isometric village game, warm tan irregular stepping stones with moss between stones, watercolor texture, no grid, no checkerboard, no objects, no text, no watermark. Square texture tile.
+```
+
+### `public/assets/village/props/*.png`
+
+```text
+Studio Ghibli hand-painted aesthetic, soft pastel watercolor palette, warm storybook lighting, painterly texture with visible brush strokes, soft ambient occlusion. Game prop sheet for a cozy 3/4 isometric kunoichi village: separate stone lantern with warm glow, small flower bed, wooden signpost without readable text, small lily pond with round leaves and soft water, tiny wildflower cluster. Each object separated with generous padding in a simple grid, isolated subjects. Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Do not use #00ff00 in the props. No text, no labels, no watermark, no shadows.
+```
+
 ## `public/assets/village/raw/characters-keyed.png`
 
 Create a game sprite atlas on a perfectly flat solid #00ff00 chroma-key background for background removal. The background must be one uniform color with no shadows, gradients, texture, reflections, floor plane, or lighting variation. Keep every subject fully separated from the background with crisp edges and generous padding. Do not use #00ff00 anywhere in the subjects. No cast shadow, no contact shadow, no reflection, no text, no watermark.

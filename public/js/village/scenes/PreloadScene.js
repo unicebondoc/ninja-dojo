@@ -23,6 +23,13 @@ export class PreloadScene extends Phaser.Scene {
     this.load.image("bg_forest", "/assets/village/background/bg_forest.png");
     this.load.image("bg_foreground", "/assets/village/background/bg_foreground.png");
     this.load.image("petal", "/assets/village/particles/petal.png");
+    this.load.image("ground_map", "/assets/village/tiles/ground_map.png");
+    this.load.image("moon_eternal", "/assets/village/moons/moon_eternal.png");
+    this.load.image("moon_earned", "/assets/village/moons/moon_earned.png");
+    for (let i = 1; i <= 4; i += 1) this.load.image(`cherry_${i}`, `/assets/village/trees/cherry_${i}.png`);
+    for (const key of ["stone_lantern", "flower_bed", "signpost", "lily_pond", "wildflowers"]) {
+      this.load.image(key, `/assets/village/props/${key}.png`);
+    }
   }
 
   create() {
