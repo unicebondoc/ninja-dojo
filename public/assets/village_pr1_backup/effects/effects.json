@@ -1,0 +1,4 @@
+{
+  "image": "effects.png",
+  "note": "Generated prop/effects atlas. PR1 consumes procedural Phaser effects for scrolls, receipts, speech bubbles, moon glow, fireworks, and rejection marks while keeping this atlas committed for regeneration comparison."
+}

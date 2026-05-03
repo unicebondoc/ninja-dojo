@@ -1,0 +1,4 @@
+{
+  "image": "terrain.png",
+  "note": "Generated prop/terrain atlas. The current map draws grass and path diamonds procedurally for predictable alignment."
+}
