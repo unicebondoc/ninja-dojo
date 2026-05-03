@@ -12,3 +12,5 @@ For the legacy Ghibli soft-pastel village prompts, see `ASSETS_GHIBLI.md`.
 ## Generated Assets
 
 (None yet - this file populated by PR 2.1 onward)
+## PR 2.1 - Skeleton
+
