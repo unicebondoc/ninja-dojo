@@ -17,7 +17,7 @@ import {
 } from "./mission-engine.js";
 import { bridgeStatus, parseOpenClawEnvelope } from "./openclaw-bridge.js";
 import { readWorld, updateWorld } from "./store.js";
-import { executeWorker } from "./workers.js";
+import { executeWorker, workerStatus } from "./workers.js";
 
 const HOST = process.env.HOST || "127.0.0.1";
 const PORT = Number(process.env.PORT || 3458);
@@ -59,6 +59,10 @@ app.get("/api/openclaw/status", async (_req, res, next) => {
 
 app.get("/api/runs/status", (_req, res) => {
   res.json(runStatus());
+});
+
+app.get("/api/workers/status", (_req, res) => {
+  res.json(workerStatus());
 });
 
 app.get("/api/missions", async (_req, res, next) => {
@@ -138,6 +142,12 @@ app.post(["/api/openclaw/messages", "/api/openclaw/bridge"], async (req, res, ne
       return;
     }
 
+    if (envelope.command.type === "receipt") {
+      const response = await receiptForMission(envelope.command.missionId);
+      res.json({ ...response, bridge: { status: response.receipt ? "receipt_ready" : "receipt_pending", type: "receipt" } });
+      return;
+    }
+
     const response = await createAndPersist({
       agent: envelope.agent,
       context: "Ninja Dojo v2 OpenClaw bridge mission.",
@@ -192,6 +202,22 @@ async function rejectAndPersist(missionId, input) {
   broadcastMissionState("rejected", response.mission, world.version);
   response.events.forEach((event) => broadcast({ ...event, worldVersion: world.version }));
   return { ...response, worldVersion: world.version };
+}
+
+async function receiptForMission(missionId) {
+  const world = await readWorld();
+  const mission = world.missions.find((item) => item.id === missionId);
+  if (!mission) {
+    const error = new Error("Mission not found.");
+    error.statusCode = 404;
+    throw error;
+  }
+  return {
+    mission,
+    receipt: mission.receipts?.[0] || world.receipts.find((item) => item.missionId === missionId) || null,
+    runLoop: runStatus(),
+    worldVersion: world.version
+  };
 }
 
 function enqueueMissionRun(missionId) {

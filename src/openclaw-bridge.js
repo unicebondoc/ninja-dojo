@@ -1,4 +1,5 @@
 const APPROVE_RE = /^\s*\/?dojo\s+approve\s+(\S+)/i;
+const RECEIPT_RE = /^\s*\/?dojo\s+receipt\s+(\S+)/i;
 const REJECT_RE = /^\s*\/?dojo\s+reject\s+(\S+)/i;
 const STATUS_RE = /^\s*\/?dojo\s+status\s*$/i;
 
@@ -35,6 +36,9 @@ function parseCommand(text, input) {
   if (explicitAction === "reject" && explicitMissionId) {
     return { missionId: String(explicitMissionId), type: "reject" };
   }
+  if (explicitAction === "receipt" && explicitMissionId) {
+    return { missionId: String(explicitMissionId), type: "receipt" };
+  }
   if (explicitAction === "status") return { type: "status" };
 
   const approve = text.match(APPROVE_RE);
@@ -42,6 +46,9 @@ function parseCommand(text, input) {
 
   const reject = text.match(REJECT_RE);
   if (reject) return { missionId: reject[1], type: "reject" };
+
+  const receipt = text.match(RECEIPT_RE);
+  if (receipt) return { missionId: receipt[1], type: "receipt" };
 
   if (STATUS_RE.test(text)) return { type: "status" };
 

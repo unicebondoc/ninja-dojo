@@ -45,6 +45,9 @@ curl -fsS "$BASE/api/openclaw/status" | node -e 'let s="";process.stdin.on("data
 echo "GET /api/runs/status"
 curl -fsS "$BASE/api/runs/status" | node -e 'let s="";process.stdin.on("data",d=>s+=d);process.stdin.on("end",()=>{const j=JSON.parse(s); if(!Array.isArray(j.active)||!Array.isArray(j.queued)||typeof j.maxParallel!=="number") process.exit(1); console.log(`active=${j.activeCount} queued=${j.queuedCount}`)})'
 
+echo "GET /api/workers/status"
+curl -fsS "$BASE/api/workers/status" | node -e 'let s="";process.stdin.on("data",d=>s+=d);process.stdin.on("end",()=>{const j=JSON.parse(s); if(!j.workers?.codex?.mode || !j.workers?.claude?.mode || typeof j.timeoutMs!=="number") process.exit(1); console.log(`codex=${j.workers.codex.mode} claude=${j.workers.claude.mode}`)})'
+
 echo "GET /api/missions"
 curl -fsS "$BASE/api/missions" | node -e 'let s="";process.stdin.on("data",d=>s+=d);process.stdin.on("end",()=>{const j=JSON.parse(s); if(!Array.isArray(j.missions)) process.exit(1); console.log(`missions=${j.missions.length}`)})'
 
@@ -55,12 +58,24 @@ MISSION_ID=$(curl -fsS -X POST "$BASE/api/missions" \
   | node -e 'let s="";process.stdin.on("data",d=>s+=d);process.stdin.on("end",()=>{const j=JSON.parse(s); if(!j.mission?.id || j.mission.approval.status!=="pending") process.exit(1); console.log(j.mission.id)})')
 echo "mission=$MISSION_ID"
 
+echo "POST /api/openclaw/messages receipt command pending"
+curl -fsS -X POST "$BASE/api/openclaw/messages" \
+  -H 'content-type: application/json' \
+  -d "{\"content\":\"/dojo receipt $MISSION_ID\",\"sender\":\"curl-test\"}" \
+  | node -e 'let s="";process.stdin.on("data",d=>s+=d);process.stdin.on("end",()=>{const j=JSON.parse(s); if(j.bridge?.status!=="receipt_pending" || j.receipt!==null || j.mission.status!=="needs_approval") process.exit(1); console.log(`${j.bridge.status} ${j.mission.status}`)})'
+
 echo "POST /api/missions/:id/approve queues run"
 curl -fsS -X POST "$BASE/api/missions/$MISSION_ID/approve" \
   -H 'content-type: application/json' \
   -d '{"decidedBy":"curl-test","notes":"approve endpoint smoke"}' \
   | node -e 'let s="";process.stdin.on("data",d=>s+=d);process.stdin.on("end",()=>{const j=JSON.parse(s); if(j.mission.status!=="queued" || j.mission.run?.status!=="queued") process.exit(1); console.log(`${j.mission.status} ${j.mission.agent}`)})'
 wait_for_receipt "$MISSION_ID" "codex"
+
+echo "POST /api/openclaw/messages receipt command ready"
+curl -fsS -X POST "$BASE/api/openclaw/messages" \
+  -H 'content-type: application/json' \
+  -d "{\"content\":\"/dojo receipt $MISSION_ID\",\"sender\":\"curl-test\"}" \
+  | node -e 'let s="";process.stdin.on("data",d=>s+=d);process.stdin.on("end",()=>{const j=JSON.parse(s); if(j.bridge?.status!=="receipt_ready" || j.receipt?.agent!=="codex" || j.mission.status!=="receipt_ready") process.exit(1); console.log(`${j.bridge.status} ${j.receipt.agent}`)})'
 
 echo "POST /api/openclaw/messages mission"
 BRIDGE_MISSION_ID=$(curl -fsS -X POST "$BASE/api/openclaw/messages" \

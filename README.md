@@ -33,9 +33,22 @@ Server binds `127.0.0.1:3458`. The run-loop script reuses a healthy local server
 
 - Approval now moves missions through `queued`, `worker_running`, and `receipt_ready` instead of returning a synchronous receipt.
 - `GET /api/runs/status` exposes active and queued worker runs.
+- `GET /api/workers/status` exposes worker mode, binary, timeout, and working directory.
 - WebSocket mission events include run-loop snapshots so the cockpit can show live queue state.
 - Queued or interrupted worker runs are requeued when the local server restarts.
-- Stub Codex/Claude workers still return canned receipts, but they now execute through the same queue path intended for real workers.
+- Stub Codex/Claude workers still return canned receipts by default, but the worker layer can now invoke real local CLIs when explicitly enabled.
+
+### Env-gated CLI workers
+
+Default worker mode is `stub`. Set `DOJO_WORKER_MODE=cli` to enable both local CLIs, or set `DOJO_CODEX_WORKER=cli` / `DOJO_CLAUDE_WORKER=cli` per agent.
+
+Useful knobs:
+
+- `DOJO_WORKER_CWD=/home/uniceadmin/ninja-dojo`
+- `DOJO_WORKER_TIMEOUT_MS=300000`
+- `DOJO_CODEX_SANDBOX=read-only` by default
+- `DOJO_CODEX_FULL_AUTO=1` to let Codex use its workspace-write full-auto mode
+- `DOJO_CODEX_MODEL=...` or `DOJO_CLAUDE_MODEL=...`
 
 ## PR1 OpenClaw bridge
 
@@ -49,6 +62,7 @@ Mission envelopes accept `content`, `text`, `message`, `scroll`, or `prompt`, pl
 - `/dojo status`
 - `/dojo approve <mission-id>`
 - `/dojo reject <mission-id>`
+- `/dojo receipt <mission-id>`
 
 The bridge writes through the same `world.json` store and emits the same lifecycle events used by the cockpit WebSocket stream.
 
