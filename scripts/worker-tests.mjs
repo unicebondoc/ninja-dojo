@@ -27,6 +27,7 @@ const baseTask = {
 
 process.env.DOJO_WORKER_MODE = "stub";
 let status = workerStatus();
+assert.equal(status.cwdAvailable, true);
 assert.equal(status.timeoutMs, 300000);
 assert.equal(status.workers.codex.ready, true);
 assert.equal(status.workers.claude.ready, true);
@@ -37,6 +38,7 @@ assert.equal(status.workers.codex.mode, "stub");
 assert.match(status.workers.codex.warning, /Unsupported worker mode/);
 
 process.env.DOJO_WORKER_MODE = "cli";
+process.env.DOJO_CLAUDE_WORKER = "stub";
 process.env.DOJO_CODEX_SANDBOX = "read-only";
 const codexReceipt = await executeWorker({ ...baseTask, agent: "codex" });
 assert.equal(codexReceipt.status, "completed");
@@ -45,11 +47,26 @@ assert.match(codexReceipt.command, /exec --cd/);
 assert.match(codexReceipt.stdout, /fake codex ok/);
 assert.match(codexReceipt.stdout, /stdin=Ninja Dojo mission mission-worker-test/);
 
+const stubbedClaudeReceipt = await executeWorker({ ...baseTask, agent: "claude" });
+assert.equal(stubbedClaudeReceipt.status, "stubbed");
+assert.equal(stubbedClaudeReceipt.exitCode, null);
+
+process.env.DOJO_CLAUDE_WORKER = "cli";
 const claudeReceipt = await executeWorker({ ...baseTask, agent: "claude" });
 assert.equal(claudeReceipt.status, "completed");
 assert.equal(claudeReceipt.exitCode, 0);
 assert.match(claudeReceipt.stdout, /fake claude ok/);
 assert.match(claudeReceipt.command, /claude --print/);
+
+process.env.DOJO_WORKER_CWD = path.join(tempDir, "missing-cwd");
+status = workerStatus();
+assert.equal(status.cwdAvailable, false);
+assert.equal(status.workers.codex.ready, false);
+assert.match(status.workers.codex.warning, /Worker cwd/);
+await assert.rejects(
+  () => executeWorker({ ...baseTask, agent: "codex" }),
+  /Worker cwd '.+' is not accessible\./
+);
 
 console.log("worker tests passed");
 

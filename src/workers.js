@@ -16,12 +16,15 @@ export async function executeWorker(task) {
 }
 
 export function workerStatus() {
+  const cwd = workerCwd();
+  const cwdAvailable = pathIsAccessible(cwd);
   return {
-    cwd: workerCwd(),
+    cwd,
+    cwdAvailable,
     timeoutMs: workerTimeoutMs(),
     workers: {
-      claude: workerDescriptor("claude"),
-      codex: workerDescriptor("codex")
+      claude: workerDescriptor("claude", cwdAvailable),
+      codex: workerDescriptor("codex", cwdAvailable)
     }
   };
 }
@@ -32,7 +35,8 @@ function delay(ms) {
 
 async function executeCliWorker(task) {
   const cwd = workerCwd();
-  await access(cwd);
+  await assertWorkerCwd(cwd);
+  assertCliExecutable(task.agent);
 
   if (task.agent === "claude") return executeClaudeCli(task, cwd);
   return executeCodexCli(task, cwd);
@@ -78,7 +82,7 @@ function workerMode(agent) {
   return normalizeWorkerMode(perAgent || process.env.DOJO_WORKER_MODE || "stub").mode;
 }
 
-function workerDescriptor(agent) {
+function workerDescriptor(agent, cwdAvailable = pathIsAccessible(workerCwd())) {
   const bin = agent === "claude" ? CLAUDE_BIN : CODEX_BIN;
   const requestedMode = (agent === "claude" ? process.env.DOJO_CLAUDE_WORKER : process.env.DOJO_CODEX_WORKER) || process.env.DOJO_WORKER_MODE || "stub";
   const mode = normalizeWorkerMode(requestedMode);
@@ -87,11 +91,12 @@ function workerDescriptor(agent) {
     available,
     bin,
     mode: mode.mode,
-    ready: mode.mode === "stub" || available,
+    ready: mode.mode === "stub" || (available && cwdAvailable),
     requestedMode
   };
   if (mode.warning) descriptor.warning = mode.warning;
   if (mode.mode === "cli" && !available) descriptor.warning = `${agent} CLI binary '${bin}' is not executable; approved missions will fail until it is available.`;
+  if (mode.mode === "cli" && available && !cwdAvailable) descriptor.warning = `Worker cwd '${workerCwd()}' is not accessible; approved missions will fail until it is available.`;
   if (agent === "codex") descriptor.sandbox = process.env.DOJO_CODEX_SANDBOX || "read-only";
   return descriptor;
 }
@@ -126,6 +131,29 @@ function canExecute(filePath) {
   } catch {
     return false;
   }
+}
+
+function pathIsAccessible(filePath) {
+  try {
+    accessSync(filePath, constants.R_OK);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+async function assertWorkerCwd(cwd) {
+  try {
+    await access(cwd, constants.R_OK);
+  } catch {
+    throw new Error(`Worker cwd '${cwd}' is not accessible.`);
+  }
+}
+
+function assertCliExecutable(agent) {
+  const bin = agent === "claude" ? CLAUDE_BIN : CODEX_BIN;
+  if (executableIsAvailable(bin)) return;
+  throw new Error(`${agent} CLI binary '${bin}' is not executable or not on PATH.`);
 }
 
 function workerTimeoutMs() {
