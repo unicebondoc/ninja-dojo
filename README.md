@@ -24,7 +24,7 @@ Server binds `127.0.0.1:3458`. The run-loop script reuses a healthy local server
 
 ## PR2 cockpit stabilization
 
-- Browser cockpit includes mission creation, pending approval actions, recent missions, receipts, and lifecycle events.
+- Browser cockpit includes mission creation, pending approval actions, recent missions, receipts, lifecycle events, worker mode status, and latest receipt HUD.
 - Canvas mission sprites clear after each lifecycle animation instead of sticking in transit.
 - `npm run test:curl` covers health, static cockpit markup, REST endpoints, OpenClaw bridge commands, and restores `data/world.json` after the smoke run.
 - `npm run test:screenshot` captures the cockpit with Playwright.

@@ -1,5 +1,7 @@
 import { spawn } from "node:child_process";
+import { accessSync, constants } from "node:fs";
 import { access } from "node:fs/promises";
+import path from "node:path";
 
 const DEFAULT_TIMEOUT_MS = 5 * 60 * 1000;
 const CODEX_BIN = process.env.DOJO_CODEX_BIN || "codex";
@@ -18,15 +20,8 @@ export function workerStatus() {
     cwd: workerCwd(),
     timeoutMs: workerTimeoutMs(),
     workers: {
-      claude: {
-        bin: CLAUDE_BIN,
-        mode: workerMode("claude")
-      },
-      codex: {
-        bin: CODEX_BIN,
-        mode: workerMode("codex"),
-        sandbox: process.env.DOJO_CODEX_SANDBOX || "read-only"
-      }
+      claude: workerDescriptor("claude"),
+      codex: workerDescriptor("codex")
     }
   };
 }
@@ -80,11 +75,54 @@ async function executeClaudeCli(task, cwd) {
 
 function workerMode(agent) {
   const perAgent = agent === "claude" ? process.env.DOJO_CLAUDE_WORKER : process.env.DOJO_CODEX_WORKER;
-  return perAgent || process.env.DOJO_WORKER_MODE || "stub";
+  return normalizeWorkerMode(perAgent || process.env.DOJO_WORKER_MODE || "stub").mode;
+}
+
+function workerDescriptor(agent) {
+  const bin = agent === "claude" ? CLAUDE_BIN : CODEX_BIN;
+  const requestedMode = (agent === "claude" ? process.env.DOJO_CLAUDE_WORKER : process.env.DOJO_CODEX_WORKER) || process.env.DOJO_WORKER_MODE || "stub";
+  const mode = normalizeWorkerMode(requestedMode);
+  const descriptor = {
+    available: executableIsAvailable(bin),
+    bin,
+    mode: mode.mode,
+    requestedMode
+  };
+  if (mode.warning) descriptor.warning = mode.warning;
+  if (agent === "codex") descriptor.sandbox = process.env.DOJO_CODEX_SANDBOX || "read-only";
+  return descriptor;
+}
+
+function normalizeWorkerMode(value) {
+  const mode = String(value || "stub").trim().toLowerCase();
+  if (mode === "cli" || mode === "stub") return { mode };
+  return {
+    mode: "stub",
+    warning: `Unsupported worker mode '${value}'; using stub.`
+  };
+}
+
+function executableIsAvailable(command) {
+  if (!command) return false;
+  if (command.includes("/")) return canExecute(command);
+
+  return (process.env.PATH || "")
+    .split(path.delimiter)
+    .filter(Boolean)
+    .some((dir) => canExecute(path.join(dir, command)));
 }
 
 function workerCwd() {
   return process.env.DOJO_WORKER_CWD || process.cwd();
+}
+
+function canExecute(filePath) {
+  try {
+    accessSync(filePath, constants.X_OK);
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 function workerTimeoutMs() {

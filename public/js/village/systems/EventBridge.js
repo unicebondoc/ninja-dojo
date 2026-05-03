@@ -15,7 +15,10 @@ export class EventBridge {
   connect() {
     const protocol = location.protocol === "https:" ? "wss" : "ws";
     this.socket = new WebSocket(`${protocol}://${location.host}/ws`);
-    this.socket.addEventListener("open", () => this.scene.setBridgeStatus("connected"));
+    this.socket.addEventListener("open", () => {
+      this.scene.setBridgeStatus("connected");
+      this.refreshWorkerStatus();
+    });
     this.socket.addEventListener("message", (message) => this.handleMessage(message));
     this.socket.addEventListener("close", () => this.scheduleReconnect());
     this.socket.addEventListener("error", () => this.scheduleReconnect());
@@ -48,6 +51,15 @@ export class EventBridge {
       this.scene.setWorldSnapshot(await response.json());
     } catch {
       // The animation stream still works without a fresh snapshot.
+    }
+  }
+
+  async refreshWorkerStatus() {
+    try {
+      const response = await fetch("/api/workers/status");
+      this.scene.setWorkerStatus(await response.json());
+    } catch {
+      this.scene.setWorkerStatus(null);
     }
   }
 

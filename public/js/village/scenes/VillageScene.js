@@ -13,6 +13,7 @@ export class VillageScene extends Phaser.Scene {
     this.kunoichi = new Map();
     this.world = null;
     this.runLoop = { activeCount: 0, queuedCount: 0 };
+    this.workerStatus = null;
     this.bridgeStatus = "connecting";
   }
 
@@ -22,6 +23,7 @@ export class VillageScene extends Phaser.Scene {
     this.drawWorld();
     this.createBuildings();
     this.createCharacters();
+    this.createHud();
     this.bridge = new EventBridge(this);
     this.bridge.connect();
     this.startTycheLoop();
@@ -30,6 +32,7 @@ export class VillageScene extends Phaser.Scene {
   update() {
     this.dialogue.update();
     this.statusText?.setText(this.statusLabel());
+    this.receiptText?.setText(this.receiptLabel());
   }
 
   drawWorld() {
@@ -97,11 +100,42 @@ export class VillageScene extends Phaser.Scene {
     this.tyche = new Tyche(this, this.pathfinder);
   }
 
+  createHud() {
+    this.add.rectangle(640, 28, 1180, 44, 0x25362f, 0.86).setStrokeStyle(1, 0xf5e6be, 0.36).setDepth(7000);
+    this.statusText = this.add.text(72, 17, this.statusLabel(), {
+      color: "#fff6dc",
+      fontFamily: "Inter, Arial, sans-serif",
+      fontSize: "16px"
+    }).setDepth(7001);
+
+    this.add.rectangle(640, 684, 1060, 40, 0x3d2f29, 0.82).setStrokeStyle(1, 0xf7c46f, 0.32).setDepth(7000);
+    this.receiptText = this.add.text(118, 673, this.receiptLabel(), {
+      color: "#fff1d0",
+      fontFamily: "Inter, Arial, sans-serif",
+      fontSize: "15px"
+    }).setDepth(7001);
+  }
+
   statusLabel() {
     const missions = this.world?.missions?.length || 0;
     const receipts = this.world?.receipts?.length || 0;
     const motion = this.runLoop.activeCount ? `${this.runLoop.activeCount} running` : this.runLoop.queuedCount ? `${this.runLoop.queuedCount} queued` : "quiet";
-    return `Bridge ${this.bridgeStatus} | ${missions} missions | ${motion}`;
+    return `Bridge ${this.bridgeStatus} | Workers ${this.workerLabel()} | ${missions} missions | ${receipts} receipts | ${motion}`;
+  }
+
+  workerLabel() {
+    const codex = this.workerStatus?.workers?.codex;
+    const claude = this.workerStatus?.workers?.claude;
+    if (!codex || !claude) return "checking";
+    return `codex ${codex.mode}${codex.available ? "" : " missing"} / claude ${claude.mode}${claude.available ? "" : " missing"}`;
+  }
+
+  receiptLabel() {
+    const receipt = this.world?.receipts?.[0];
+    const mission = this.world?.missions?.[0];
+    if (receipt) return `Latest receipt ${receipt.agent}: ${shortText(receipt.summary || receipt.status || receipt.id, 112)}`;
+    if (mission) return `Latest mission ${mission.status}: ${shortText(mission.summary || mission.id, 112)}`;
+    return "Mission board idle";
   }
 
   setWorldSnapshot(world) {
@@ -110,6 +144,10 @@ export class VillageScene extends Phaser.Scene {
 
   setRunLoop(runLoop) {
     this.runLoop = runLoop || this.runLoop;
+  }
+
+  setWorkerStatus(status) {
+    this.workerStatus = status;
   }
 
   setBridgeStatus(status) {

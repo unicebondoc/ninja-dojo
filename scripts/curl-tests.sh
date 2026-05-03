@@ -46,7 +46,7 @@ echo "GET /api/runs/status"
 curl -fsS "$BASE/api/runs/status" | node -e 'let s="";process.stdin.on("data",d=>s+=d);process.stdin.on("end",()=>{const j=JSON.parse(s); if(!Array.isArray(j.active)||!Array.isArray(j.queued)||typeof j.maxParallel!=="number") process.exit(1); console.log(`active=${j.activeCount} queued=${j.queuedCount}`)})'
 
 echo "GET /api/workers/status"
-curl -fsS "$BASE/api/workers/status" | node -e 'let s="";process.stdin.on("data",d=>s+=d);process.stdin.on("end",()=>{const j=JSON.parse(s); if(!j.workers?.codex?.mode || !j.workers?.claude?.mode || typeof j.timeoutMs!=="number") process.exit(1); console.log(`codex=${j.workers.codex.mode} claude=${j.workers.claude.mode}`)})'
+curl -fsS "$BASE/api/workers/status" | node -e 'let s="";process.stdin.on("data",d=>s+=d);process.stdin.on("end",()=>{const j=JSON.parse(s); const c=j.workers?.codex; const a=j.workers?.claude; if(!c?.mode || !a?.mode || !c?.requestedMode || !a?.requestedMode || typeof c.available!=="boolean" || typeof a.available!=="boolean" || typeof j.timeoutMs!=="number") process.exit(1); console.log(`codex=${c.mode}/${c.requestedMode} available=${c.available} claude=${a.mode}/${a.requestedMode} available=${a.available}`)})'
 
 echo "GET /api/missions"
 curl -fsS "$BASE/api/missions" | node -e 'let s="";process.stdin.on("data",d=>s+=d);process.stdin.on("end",()=>{const j=JSON.parse(s); if(!Array.isArray(j.missions)) process.exit(1); console.log(`missions=${j.missions.length}`)})'
