@@ -151,3 +151,4 @@ No isometric angle, no 3/4 angle, no characters, no buildings.
 
 Generated deterministically with PIL pixel drawing to match the approved palette; no API or metered model call used.
 
+## PR 2.2 - Characters & Live Telemetry
