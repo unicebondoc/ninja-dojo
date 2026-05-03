@@ -7,6 +7,7 @@
     "start": "node src/server.js",
     "dev:dojo": "bash scripts/run-loop.sh",
     "test:curl": "bash scripts/curl-tests.sh",
+    "test:workers": "node scripts/worker-tests.mjs",
     "test:screenshot": "node scripts/screenshot.mjs"
   },
   "dependencies": {

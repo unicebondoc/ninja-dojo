@@ -82,13 +82,16 @@ function workerDescriptor(agent) {
   const bin = agent === "claude" ? CLAUDE_BIN : CODEX_BIN;
   const requestedMode = (agent === "claude" ? process.env.DOJO_CLAUDE_WORKER : process.env.DOJO_CODEX_WORKER) || process.env.DOJO_WORKER_MODE || "stub";
   const mode = normalizeWorkerMode(requestedMode);
+  const available = executableIsAvailable(bin);
   const descriptor = {
-    available: executableIsAvailable(bin),
+    available,
     bin,
     mode: mode.mode,
+    ready: mode.mode === "stub" || available,
     requestedMode
   };
   if (mode.warning) descriptor.warning = mode.warning;
+  if (mode.mode === "cli" && !available) descriptor.warning = `${agent} CLI binary '${bin}' is not executable; approved missions will fail until it is available.`;
   if (agent === "codex") descriptor.sandbox = process.env.DOJO_CODEX_SANDBOX || "read-only";
   return descriptor;
 }
@@ -126,7 +129,9 @@ function canExecute(filePath) {
 }
 
 function workerTimeoutMs() {
-  return Number(process.env.DOJO_WORKER_TIMEOUT_MS || DEFAULT_TIMEOUT_MS);
+  const timeoutMs = Number(process.env.DOJO_WORKER_TIMEOUT_MS || DEFAULT_TIMEOUT_MS);
+  if (!Number.isFinite(timeoutMs) || timeoutMs < 1000) return DEFAULT_TIMEOUT_MS;
+  return timeoutMs;
 }
 
 function promptFor(task) {
