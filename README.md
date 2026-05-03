@@ -1,16 +1,17 @@
 # Ninja Dojo
 
-A read-only living kunoichi village — Unice's autonomous agent clan
-visualized as a Ghibli-style 2D game.
+A read-only living dojo compound — Unice's autonomous agent clan
+visualized as a Sea of Stars-style detailed pixel-art top-down 2D
+game.
 
 ## Run
 
-```
+```bash
 npm install
 npm run dev:dojo
 ```
 
-Server binds `127.0.0.1:3458`. Open in a browser to see the village.
+Server binds `127.0.0.1:3458`. Open in a browser to see the dojo.
 
 ## Canonical Vision
 
@@ -21,9 +22,17 @@ vision and PR sequence.
 
 Append `?debug=true` to the URL to surface operational HUDs, worker
 status overlays, and lifecycle event streams. Default view is the
-village only.
+dojo only.
 
 ## Architecture History
 
 See [`docs/legacy/cockpit-history.md`](./docs/legacy/cockpit-history.md)
-for the OpenClaw cockpit lineage that preceded the village.
+for the OpenClaw cockpit lineage. The Ghibli painted village direction
+that preceded the pixel pivot is preserved at the `ghibli-village-final`
+tag, with sprites archived in `public/assets/village_ghibli_archive/`
+and generation prompts in `ASSETS_GHIBLI.md`.
+
+## Asset Generation Logs
+
+- `ASSETS_PIXEL.md` — current pixel direction (PR 2.1+)
+- `ASSETS_GHIBLI.md` — archived Ghibli painted direction (PR 1.5/1.6)
