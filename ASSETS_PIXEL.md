@@ -104,3 +104,50 @@ Modern detailed pixel art top-down view, strict overhead camera like a floor-pla
 Generator fallback for transparency: if transparent background is not supported, place only the outside/background matte on pure bright magenta (#ff00ff) or a standard transparency checkerboard so it can be removed cleanly after generation. Do not use magenta inside the hut, grass, props, or lights.
 ```
 
+### Phase 2.1-3 - Ground Tiles, Props, Sky Strip, Twin Moons
+
+#### public/assets/dojo/tiles/*.png
+
+```text
+Modern detailed pixel art top-down tileset sheet matching the approved Ninja Dojo pixel style anchor. Strict overhead game-map camera, Sea of Stars / Persona 5 detailed pixel aesthetic, vibrant warm palette.
+
+Create a clean 3 columns x 3 rows tile sheet. Each tile is exactly 128x128 pixels in this generated sheet and will be downsampled to 16x16 game tiles. No text, no labels, no gutters, no borders.
+
+Tile order left-to-right, top-to-bottom:
+1 base detailed grass tile
+2 grass variant with tiny pink and white flowers
+3 grass variant with tiny pebbles
+4 stone path straight tile
+5 stone path corner turning north-east
+6 stone path corner turning north-west
+7 stone path corner turning south-east
+8 stone path corner turning south-west
+9 central plaza stone tile with subtle decorative pattern
+
+All tiles must be strict top-down and tileable at edges. No isometric angle, no perspective, no buildings, no characters.
+```
+
+#### public/assets/dojo/props/*.png
+
+```text
+Modern detailed pixel art top-down prop sheet matching the approved Ninja Dojo pixel style anchor. Strict overhead game-map camera, Sea of Stars / Persona 5 detailed pixel aesthetic, vibrant warm palette.
+
+Create a clean 4 columns x 2 rows prop sheet. Each prop occupies exactly one 128x128 cell in this generated sheet and will be downsampled to 32x32 game props. Transparent-like removable background: use pure bright magenta (#ff00ff) or a simple checkerboard behind empty areas only. No text, no labels, no borders.
+
+Prop order left-to-right, top-to-bottom:
+1 pink cherry blossom tree top-down
+2 second cherry blossom tree variant top-down
+3 Japanese stone lantern top-down
+4 hanging paper lantern top-down
+5 small flower bed cluster top-down
+6 wooden sign post top-down
+7 small decorative rock top-down
+8 wooden fence segment top-down
+
+No isometric angle, no 3/4 angle, no characters, no buildings.
+```
+
+#### public/assets/dojo/ui/sky_strip.png, moon_eternal.png, moon_earned.png
+
+Generated deterministically with PIL pixel drawing to match the approved palette; no API or metered model call used.
+
