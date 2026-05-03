@@ -6,6 +6,54 @@ Generated with OpenClaw image generation using `openai/gpt-image-2` on 2026-05-0
 
 Hand-painted Studio Ghibli-inspired soft pastel watercolor texture, warm storybook lighting, chibi proportions, crisp clean edges, no harsh pixels, no anime line art, no cel shading, no text, no watermark.
 
+## PR 1.5 Phase 1 Prompts
+
+Generated with the built-in image generation path and copied into the project. Dimension normalization and petal chroma-key cleanup were performed locally with Pillow.
+
+### `public/assets/village/STYLE_ANCHOR.png`
+
+```text
+Studio Ghibli hand-painted aesthetic, soft pastel watercolor palette,
+chibi proportions (head 1/3 of body), 3/4 top-down isometric perspective,
+warm storybook lighting, painterly texture with visible brush strokes,
+NO harsh pixel edges, NO cel-shading line art, NO anime-style outlines,
+soft ambient occlusion, dreamlike atmosphere.
+Reference: Spirited Away color palette, Princess Mononoke painterly texture.
+Subject: a single chibi female ninja with lavender hair standing in
+a soft grass clearing, transparent background, full body visible,
+feet on ground, neutral pose.
+```
+
+### `public/assets/village/background/bg_sky.png`
+
+```text
+Studio Ghibli hand-painted aesthetic, soft pastel watercolor palette, warm storybook lighting, painterly texture with visible brush strokes, soft ambient occlusion, dreamlike atmosphere. Wide 16:9 hand-painted background layer for a 2D kunoichi village game. Soft sky gradient from pale peach at the horizon to mint cream in the middle to soft lavender at the top, with a few wispy hand-painted clouds drifting near the upper sky. No mountains, no trees, no foreground, no characters, no text, no watermark.
+```
+
+### `public/assets/village/background/bg_mountains.png`
+
+```text
+Studio Ghibli hand-painted aesthetic, soft pastel watercolor palette, warm storybook lighting, painterly texture with visible brush strokes, soft ambient occlusion, dreamlike atmosphere. Wide horizontal background layer for a 2D kunoichi village game: distant mountain silhouettes with soft mist and painterly blue-purple distance haze, low ridge line across the bottom third, lots of empty sky-like space above ridge. No trees, no foreground, no buildings, no characters, no text, no watermark.
+```
+
+### `public/assets/village/background/bg_forest.png`
+
+```text
+Studio Ghibli hand-painted aesthetic, soft pastel watercolor palette, warm storybook lighting, painterly texture with visible brush strokes, soft ambient occlusion, dreamlike atmosphere. Wide horizontal mid-distance background layer for a 2D kunoichi village game: soft green hills and a hand-painted forest line across the lower half, slightly blurred by distance and gentle mist. Empty sky-like pastel space above the forest. No buildings, no characters, no foreground props, no text, no watermark.
+```
+
+### `public/assets/village/background/bg_foreground.png`
+
+```text
+Studio Ghibli hand-painted aesthetic, soft pastel watercolor palette, warm storybook lighting, painterly texture with visible brush strokes, soft ambient occlusion, dreamlike atmosphere. Wide horizontal foreground edge layer for a 2D kunoichi village game: detailed grass tufts, tiny wildflowers, small mossy rocks, and soft painterly soil texture along the bottom edge only. Upper two-thirds should be simple pale sky-colored empty space so it can frame the village from the bottom. No buildings, no characters, no text, no watermark.
+```
+
+### `public/assets/village/particles/petal.png`
+
+```text
+Studio Ghibli hand-painted aesthetic, soft pastel watercolor palette, warm storybook lighting, painterly texture with visible brush strokes. Single cherry blossom petal game sprite, soft pink with a subtle gradient edge, isolated centered subject, generous padding, no shadow, no text, no watermark. Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Do not use #00ff00 anywhere in the petal.
+```
+
 ## `public/assets/village/raw/characters-keyed.png`
 
 Create a game sprite atlas on a perfectly flat solid #00ff00 chroma-key background for background removal. The background must be one uniform color with no shadows, gradients, texture, reflections, floor plane, or lighting variation. Keep every subject fully separated from the background with crisp edges and generous padding. Do not use #00ff00 anywhere in the subjects. No cast shadow, no contact shadow, no reflection, no text, no watermark.

@@ -15,6 +15,7 @@ export class VillageScene extends Phaser.Scene {
     this.runLoop = { activeCount: 0, queuedCount: 0 };
     this.workerStatus = null;
     this.bridgeStatus = "connecting";
+    this.parallaxLayers = [];
   }
 
   create() {
@@ -33,13 +34,11 @@ export class VillageScene extends Phaser.Scene {
     this.dialogue.update();
     this.statusText?.setText(this.statusLabel());
     this.receiptText?.setText(this.receiptLabel());
+    this.updateParallaxLayers();
   }
 
   drawWorld() {
-    const sky = this.add.graphics().setDepth(-100);
-    sky.fillGradientStyle(0xe5f2ed, 0xe5f2ed, 0xf8ddc9, 0xbcdccf, 1);
-    sky.fillRect(0, 0, 1280, 720);
-
+    this.createParallaxBackground();
     this.add.circle(118, 92, 36, 0xf7efd5, 0.88).setDepth(-90);
     this.add.circle(1166, 98, 30, 0xf7d66b, 0.82).setDepth(-90);
 
@@ -58,6 +57,40 @@ export class VillageScene extends Phaser.Scene {
 
     for (let i = 0; i < 22; i += 1) this.drawTree(i);
     for (const tile of [{ x: 7, y: 5 }, { x: 11, y: 5 }, { x: 7, y: 7 }, { x: 11, y: 7 }]) this.drawLantern(tile);
+    this.createPetalDrift();
+  }
+
+  createParallaxBackground() {
+    this.parallaxLayers = [
+      { image: this.add.tileSprite(640, 360, 1280, 720, "bg_sky").setDepth(-130), factor: 0 },
+      { image: this.add.tileSprite(640, 250, 1280, 400, "bg_mountains").setDepth(-120).setAlpha(0.78), factor: 0.1 },
+      { image: this.add.tileSprite(640, 330, 1280, 310, "bg_forest").setDepth(-110).setAlpha(0.72), factor: 0.3 },
+      { image: this.add.tileSprite(640, 645, 1280, 150, "bg_foreground").setDepth(5200).setAlpha(0.86), factor: 0.6 }
+    ];
+    for (const layer of this.parallaxLayers) layer.image.setScrollFactor(0);
+  }
+
+  updateParallaxLayers() {
+    const time = this.time.now || 0;
+    for (const layer of this.parallaxLayers) {
+      layer.image.tilePositionX = time * 0.0025 * layer.factor;
+    }
+  }
+
+  createPetalDrift() {
+    this.petals = this.add.particles(0, 0, "petal", {
+      x: { min: -80, max: 1360 },
+      y: -20,
+      lifespan: { min: 9000, max: 15000 },
+      speedX: { min: -18, max: 34 },
+      speedY: { min: 18, max: 48 },
+      scale: { min: 0.35, max: 0.82 },
+      alpha: { start: 0.8, end: 0 },
+      rotate: { min: -180, max: 180 },
+      frequency: 380,
+      quantity: 1,
+      blendMode: "NORMAL"
+    }).setDepth(5600);
   }
 
   drawTree(index) {

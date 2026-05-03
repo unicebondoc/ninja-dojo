@@ -18,6 +18,11 @@ export class PreloadScene extends Phaser.Scene {
     this.load.image("characters", "/assets/village/characters/characters.png");
     this.load.image("buildings", "/assets/village/buildings/buildings.png");
     this.load.image("effects", "/assets/village/effects/effects.png");
+    this.load.image("bg_sky", "/assets/village/background/bg_sky.png");
+    this.load.image("bg_mountains", "/assets/village/background/bg_mountains.png");
+    this.load.image("bg_forest", "/assets/village/background/bg_forest.png");
+    this.load.image("bg_foreground", "/assets/village/background/bg_foreground.png");
+    this.load.image("petal", "/assets/village/particles/petal.png");
   }
 
   create() {
