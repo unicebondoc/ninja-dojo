@@ -999,3 +999,27 @@ Subject: Meowts' Shrine interior with roof removed: small cat statues, altar wit
 
 Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no gradients, no scenery. Do not use #00ff00 in the interior props.
 ```
+
+## PR 1.6 Grounding Prompts
+
+Generated with OpenClaw `openai/gpt-image-2`, then chroma-keyed and normalized into painted meadow composition layers.
+
+### `public/assets/village/background/bg_groundplane.png`
+
+```text
+Studio Ghibli hand-painted aesthetic, painterly meadow texture matching
+bg_foreground.png style. Color: same warm green palette.
+
+Subject: a soft circular/oval meadow patch that the village isometric
+grid would sit on. Edges feather softly into transparency at the outer
+rim — no hard borders. Like a gently lit clearing in a wider meadow,
+viewed from above and slightly tilted (3/4 isometric perspective to
+match the village map angle).
+
+Image dimensions: 1600×1000. Painted meadow content occupies a soft
+oval roughly 1400×800 centered, fading to transparent at the edges
+over a 100-200px feather. NO buildings, NO grid lines, NO characters.
+
+Render transparent areas on perfectly flat #00ff00 chroma key green for
+post-processing. Do not use #00ff00 in the meadow.
+```
