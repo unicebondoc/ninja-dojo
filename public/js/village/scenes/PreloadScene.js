@@ -47,6 +47,7 @@ export class PreloadScene extends Phaser.Scene {
     }
 
     for (const id of ["moji", "miji", "maji", "meji", "muji", "meowts"]) {
+      this.load.image(`dojo_interior_${id}`, `/assets/dojo/interiors/${id}_interior.png`);
       this.load.spritesheet(`dojo_kunoichi_${id}`, `/assets/dojo/characters/${id}_atlas.png`, {
         frameWidth: 32,
         frameHeight: 32

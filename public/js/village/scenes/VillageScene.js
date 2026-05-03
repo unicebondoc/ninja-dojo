@@ -42,6 +42,8 @@ export class VillageScene extends Phaser.Scene {
     this.kunoichi = new Map();
     this.statusBanners = new Map();
     this.speechBubbles = new Set();
+    this.activeInterior = null;
+    this.closeButton = null;
   }
 
   create() {
@@ -51,6 +53,7 @@ export class VillageScene extends Phaser.Scene {
     this.cameras.main.setScroll(0, 0);
     this.drawStaticCompound();
     this.createCharacters();
+    this.createInteriorControls();
     this.createDebugHud();
     this.bridge = new EventBridge(this);
     this.bridge.connect();
@@ -158,8 +161,191 @@ export class VillageScene extends Phaser.Scene {
   drawHuts() {
     for (const hut of HUTS) {
       const shadow = this.add.ellipse(hut.x, hut.y + 46, 168, 54, 0x0e1418, 0.22).setDepth(hut.y - 2);
+      const interior = this.add.image(hut.x, hut.y + 2, `dojo_interior_${hut.id}`)
+        .setDepth(hut.y - 1)
+        .setAlpha(0)
+        .setVisible(false);
+      const glow = this.add.rectangle(hut.x, hut.y + 4, 182, 164, 0xfff0ae, 0)
+        .setStrokeStyle(2, 0xfff0ae, 0)
+        .setDepth(hut.y + 3);
       const sprite = this.add.image(hut.x, hut.y, hut.key).setDepth(hut.y).setScale(1);
-      this.huts.set(hut.id, { ...hut, sprite, shadow });
+      const zone = this.add.zone(hut.x, hut.y + 8, 176, 158)
+        .setInteractive({ useHandCursor: true })
+        .setDepth(hut.y + 160);
+      const record = {
+        ...hut,
+        baseX: hut.x,
+        baseY: hut.y,
+        workPoint: { x: hut.x, y: hut.y + 34 },
+        sprite,
+        shadow,
+        interior,
+        glow,
+        zone,
+        savedState: null
+      };
+      zone.on("pointerover", () => this.hoverHut(record, true));
+      zone.on("pointerout", () => this.hoverHut(record, false));
+      zone.on("pointerdown", (pointer) => {
+        pointer.event?.stopPropagation?.();
+        this.openInterior(record.id);
+      });
+      this.huts.set(hut.id, record);
+    }
+  }
+
+  createInteriorControls() {
+    const bg = this.add.rectangle(0, 0, 26, 26, 0x171b20, 0.9)
+      .setStrokeStyle(1, 0xfff0ae, 0.82);
+    const glyph = this.add.text(0, -1, "x", {
+      color: "#fff3c8",
+      fontFamily: "monospace",
+      fontSize: "18px",
+      align: "center"
+    }).setOrigin(0.5);
+    this.closeButton = this.add.container(0, 0, [bg, glyph])
+      .setSize(26, 26)
+      .setDepth(7200)
+      .setVisible(false)
+      .setInteractive({ useHandCursor: true });
+    this.closeButton.on("pointerdown", (pointer) => {
+      pointer.event?.stopPropagation?.();
+      this.closeInterior();
+    });
+    this.input.keyboard?.on("keydown-ESC", () => this.closeInterior());
+    this.input.on("pointerdown", (_pointer, gameObjects) => {
+      if (this.activeInterior && (!gameObjects || gameObjects.length === 0)) this.closeInterior();
+    });
+  }
+
+  hoverHut(record, active) {
+    if (!record || this.activeInterior?.id === record.id) return;
+    this.tweens.killTweensOf([record.sprite, record.glow]);
+    this.tweens.add({
+      targets: record.sprite,
+      alpha: active ? 0.5 : 1,
+      duration: 200,
+      ease: "Sine.easeOut"
+    });
+    this.tweens.add({
+      targets: record.glow,
+      alpha: active ? 0.78 : 0,
+      duration: 200,
+      ease: "Sine.easeOut",
+      onUpdate: () => record.glow.setStrokeStyle(2, 0xfff0ae, active ? record.glow.alpha : 0),
+      onComplete: () => record.glow.setStrokeStyle(2, 0xfff0ae, active ? 0.78 : 0)
+    });
+  }
+
+  async openInterior(id) {
+    const record = this.huts.get(id);
+    if (!record) return;
+    if (this.activeInterior?.id === id) return;
+    if (this.activeInterior) this.closeInterior(true);
+
+    const entity = this.kunoichi.get(id);
+    record.savedState = {
+      state: entity?.state || "idle",
+      anim: entity?.sprite?.anims?.currentAnim?.key || null
+    };
+    this.activeInterior = record;
+    this.tweens.killTweensOf([record.sprite, record.interior, record.glow]);
+    record.interior.setVisible(true).setAlpha(0);
+    record.glow.setAlpha(0.88).setStrokeStyle(2, 0xfff0ae, 0.88);
+    record.zone.disableInteractive();
+
+    this.tweens.add({
+      targets: record.interior,
+      alpha: 1,
+      duration: 220,
+      ease: "Sine.easeOut"
+    });
+    this.tweens.add({
+      targets: record.sprite,
+      y: record.baseY - 32,
+      alpha: 0.2,
+      duration: 300,
+      ease: "Sine.easeOut"
+    });
+    this.emitRoofDust(record);
+
+    if (entity) {
+      this.tweens.killTweensOf(entity.sprite);
+      entity.walkTo(record.workPoint, 360).then(() => {
+        if (this.activeInterior?.id === id) entity.startWorkAnimation();
+      });
+      const status = await (this.bridge?.getKunoichiStatus(id) || Promise.resolve({ label: "Idle", tone: "idle" }));
+      this.updateStatusBanner(id, status);
+    }
+
+    this.closeButton
+      ?.setPosition(record.baseX + 72, record.baseY - 74)
+      .setVisible(true)
+      .setDepth(record.baseY + 185);
+  }
+
+  closeInterior(skipTween = false) {
+    const record = this.activeInterior;
+    if (!record) return;
+    const entity = this.kunoichi.get(record.id);
+    const duration = skipTween ? 0 : 300;
+    this.activeInterior = null;
+    this.tweens.killTweensOf([record.sprite, record.interior, record.glow]);
+    record.zone.setInteractive({ useHandCursor: true });
+    this.closeButton?.setVisible(false);
+
+    this.tweens.add({
+      targets: record.sprite,
+      y: record.baseY,
+      alpha: 1,
+      duration,
+      ease: "Sine.easeIn"
+    });
+    this.tweens.add({
+      targets: record.interior,
+      alpha: 0,
+      duration,
+      ease: "Sine.easeIn",
+      onComplete: () => record.interior.setVisible(false)
+    });
+    this.tweens.add({
+      targets: record.glow,
+      alpha: 0,
+      duration,
+      ease: "Sine.easeIn",
+      onUpdate: () => record.glow.setStrokeStyle(2, 0xfff0ae, record.glow.alpha),
+      onComplete: () => record.glow.setStrokeStyle(2, 0xfff0ae, 0)
+    });
+
+    if (entity) {
+      this.tweens.killTweensOf(entity.sprite);
+      if (record.savedState?.state === "working" || record.savedState?.anim?.endsWith(":work")) {
+        entity.startWorkAnimation();
+      } else {
+        entity.idle();
+      }
+    }
+    record.savedState = null;
+  }
+
+  emitRoofDust(record) {
+    for (let i = 0; i < 9; i += 1) {
+      const dust = this.add.rectangle(
+        record.baseX + Phaser.Math.Between(-62, 62),
+        record.baseY + Phaser.Math.Between(-42, 42),
+        3,
+        3,
+        Phaser.Utils.Array.GetRandom([0xfff0ae, 0xf8d77f, 0xb9d08b]),
+        0.86
+      ).setDepth(record.baseY + 180);
+      this.tweens.add({
+        targets: dust,
+        y: dust.y - Phaser.Math.Between(10, 26),
+        alpha: 0,
+        duration: Phaser.Math.Between(420, 700),
+        ease: "Sine.easeOut",
+        onComplete: () => dust.destroy()
+      });
     }
   }
 
