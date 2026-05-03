@@ -135,9 +135,13 @@ export class Kunoichi {
   }
 
   work(text = "Working...") {
+    this.startWorkAnimation();
+    this.dialogue.show(this.config.id, this.sprite, text, 2600);
+  }
+
+  startWorkAnimation() {
     this.state = "working";
     this.play("work");
-    this.dialogue.show(this.config.id, this.sprite, text, 2600);
     if (!this.hasFlipbooks) this.scene.tweens.add({ targets: this.sprite, angle: 2, duration: 180, yoyo: true, repeat: 8 });
   }
 

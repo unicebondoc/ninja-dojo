@@ -935,3 +935,67 @@ Single horizontal sprite strip with exactly 4 frames showing Tyche crouching low
 
 Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no shadows, no gradients, no texture. Do not use #00ff00 in the cat. No frame borders, no numbers, no labels, no text, no watermark.
 ```
+
+## PR 1.5 Phase 5 Prompts
+
+Generated with OpenClaw `openai/gpt-image-2`, then chroma-keyed and normalized into 512px cutaway sprites.
+
+### `public/assets/village/interiors/moji_interior.png`
+
+```text
+Production-ready 2D isometric hut interior cutaway matching the Ninja Dojo village asset style: soft watercolor painterly texture, cozy Ghibli-inspired pastel palette, warm storybook lighting, 3/4 top-down isometric perspective, clean readable game asset silhouette.
+
+Subject: Moji's Scroll Hut interior with roof removed: writing desk, ink stone, brush, scrolls in cubbies, oil lamp, floor cushion, lavender cloth details. Transparent-ready game sprite composition centered in a 512x512 square. The roof is removed cleanly so the viewer can peek inside, but low walls/floor remain visible. No character, no text, no labels, no UI, no frame border, no watermark. Keep the full cutaway inside the canvas with soft shadow and consistent isometric angle.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no gradients, no scenery. Do not use #00ff00 in the interior props.
+```
+
+### `public/assets/village/interiors/miji_interior.png`
+
+```text
+Production-ready 2D isometric hut interior cutaway matching the Ninja Dojo village asset style: soft watercolor painterly texture, cozy Ghibli-inspired pastel palette, warm storybook lighting, 3/4 top-down isometric perspective, clean readable game asset silhouette.
+
+Subject: Miji's Forge interior with roof removed: anvil, hammer, compact fire pit with glowing coals, weapon racks, bellows, blue steel details. Transparent-ready game sprite composition centered in a 512x512 square. The roof is removed cleanly so the viewer can peek inside, but low walls/floor remain visible. No character, no text, no labels, no UI, no frame border, no watermark. Keep the full cutaway inside the canvas with soft shadow and consistent isometric angle.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no gradients, no scenery. Do not use #00ff00 in the interior props.
+```
+
+### `public/assets/village/interiors/maji_interior.png`
+
+```text
+Production-ready 2D isometric hut interior cutaway matching the Ninja Dojo village asset style: soft watercolor painterly texture, cozy Ghibli-inspired pastel palette, warm storybook lighting, 3/4 top-down isometric perspective, clean readable game asset silhouette.
+
+Subject: Maji's Training Dojo interior with roof removed: weapon rack, practice posts, tatami floor, training scroll on wall, red banners. Transparent-ready game sprite composition centered in a 512x512 square. The roof is removed cleanly so the viewer can peek inside, but low walls/floor remain visible. No character, no text, no labels, no UI, no frame border, no watermark. Keep the full cutaway inside the canvas with soft shadow and consistent isometric angle.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no gradients, no scenery. Do not use #00ff00 in the interior props.
+```
+
+### `public/assets/village/interiors/meji_interior.png`
+
+```text
+Production-ready 2D isometric hut interior cutaway matching the Ninja Dojo village asset style: soft watercolor painterly texture, cozy Ghibli-inspired pastel palette, warm storybook lighting, 3/4 top-down isometric perspective, clean readable game asset silhouette.
+
+Subject: Meji's Tea House interior with roof removed: tea kettle on hearth, low table, tea bowls, hanging herbs, mint fabric accents. Transparent-ready game sprite composition centered in a 512x512 square. The roof is removed cleanly so the viewer can peek inside, but low walls/floor remain visible. No character, no text, no labels, no UI, no frame border, no watermark. Keep the full cutaway inside the canvas with soft shadow and consistent isometric angle.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no gradients, no scenery. Do not use #00ff00 in the interior props.
+```
+
+### `public/assets/village/interiors/muji_interior.png`
+
+```text
+Production-ready 2D isometric hut interior cutaway matching the Ninja Dojo village asset style: soft watercolor painterly texture, cozy Ghibli-inspired pastel palette, warm storybook lighting, 3/4 top-down isometric perspective, clean readable game asset silhouette.
+
+Subject: Muji's Launch Pad workshop interior with roof removed: workbench with blueprints, rocket parts, gears, scaffolding, golden tool details. Transparent-ready game sprite composition centered in a 512x512 square. The roof is removed cleanly so the viewer can peek inside, but low walls/floor remain visible. No character, no text, no labels, no UI, no frame border, no watermark. Keep the full cutaway inside the canvas with soft shadow and consistent isometric angle.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no gradients, no scenery. Do not use #00ff00 in the interior props.
+```
+
+### `public/assets/village/interiors/meowts_interior.png`
+
+```text
+Production-ready 2D isometric hut interior cutaway matching the Ninja Dojo village asset style: soft watercolor painterly texture, cozy Ghibli-inspired pastel palette, warm storybook lighting, 3/4 top-down isometric perspective, clean readable game asset silhouette.
+
+Subject: Meowts' Shrine interior with roof removed: small cat statues, altar with hovering scroll, incense burner, soft white and pink sacred cloth. Transparent-ready game sprite composition centered in a 512x512 square. The roof is removed cleanly so the viewer can peek inside, but low walls/floor remain visible. No character, no text, no labels, no UI, no frame border, no watermark. Keep the full cutaway inside the canvas with soft shadow and consistent isometric angle.
+
+Render on a perfectly flat solid #00ff00 chroma-key background for transparent background removal. Background must be one uniform green with no checkerboard, no gradients, no scenery. Do not use #00ff00 in the interior props.
+```

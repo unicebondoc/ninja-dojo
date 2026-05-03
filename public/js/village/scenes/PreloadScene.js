@@ -31,6 +31,9 @@ export class PreloadScene extends Phaser.Scene {
       this.load.image(key, `/assets/village/props/${key}.png`);
     }
     for (const id of KUNOICHI_IDS) {
+      this.load.image(`${id}_interior`, `/assets/village/interiors/${id}_interior.png`);
+    }
+    for (const id of KUNOICHI_IDS) {
       for (const [action, frames] of Object.entries(KUNOICHI_ACTIONS)) {
         this.load.spritesheet(`kunoichi_${id}_${action}`, `/assets/village/animations/kunoichi/${id}/${action}.png`, {
           frameWidth: 256,
